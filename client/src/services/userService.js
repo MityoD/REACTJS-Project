@@ -36,3 +36,18 @@ export const logout = async (token) => {
         }
     })
 };
+
+
+export const addTool = async (data, token) => {
+    const response = await fetch(`http://localhost:3030/data/tools`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            'X-Authorization': token
+        },
+        body: JSON.stringify(data)
+    })
+    const result = await response.json();
+    console.log(result)
+    return result;
+};

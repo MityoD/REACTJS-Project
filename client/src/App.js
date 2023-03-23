@@ -12,6 +12,7 @@ import { CarouselItems } from './components/CarouselItems/CarouselItems';
 import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
 import { Logout } from './components/Logout/Logout';
+import { AddTool } from './components/Tool/AddTool'
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
                 <Route path='/login' element={<Login />} />
                 <Route path='/logout' element={<Logout />} />
                 <Route path='/register' element={<Register />} />
+                <Route path='/add-tool' element={<AddTool />} />
             </Routes>
         </AuthProvider>
             </BrowserRouter>

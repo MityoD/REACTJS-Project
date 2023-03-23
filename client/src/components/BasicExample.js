@@ -20,15 +20,16 @@ function BasicExample() {
             <Nav.Link href="/tools">Tools</Nav.Link>
             <Nav.Link href="/jobs">Jobs</Nav.Link>
             <Nav.Link href="/contractors">Contractors</Nav.Link>
+            <Nav.Link href="/add-tool">Add tool</Nav.Link>
 
             {isAuthenticated ?
               <>
-                <span style={{ marginLeft: '40em', marginTop:'auto', marginBottom:'auto' }} >{userEmail}</span>
+                <span style={{ marginLeft: '35em', marginTop:'auto', marginBottom:'auto' }} >{userEmail}</span>
                 <Nav.Link href="/logout">Logout</Nav.Link>
               </>
             :
               <>
-                <Nav.Link style={{ marginLeft: '40em' }} href="/login">Login</Nav.Link>
+                <Nav.Link style={{ marginLeft: '35em' }} href="/login">Login</Nav.Link>
                 <Nav.Link href="/register">Register</Nav.Link>
               </>
             }
