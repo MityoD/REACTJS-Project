@@ -1,12 +1,12 @@
 import Carousel from 'react-bootstrap/Carousel';
 
-function DarkVariantExample() {
+export const CarouselItems = () => {
   return (
     <Carousel variant="dark">
       <Carousel.Item>
         <img
-          className="d-block w-100"
-          src="holder.js/800x400?text=First slide&bg=f5f5f5"
+          className="d-block w-70 m-auto pb-50"
+          src="https://media.screwfix.com/is/image/ae235/412XT_P?wid=414&hei=414&dpr=on"
           alt="First slide"
         />
         <Carousel.Caption>
@@ -16,8 +16,8 @@ function DarkVariantExample() {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block w-100"
-          src="holder.js/800x400?text=Second slide&bg=eee"
+          className="d-block w-70 m-auto pb-50"
+          src="https://media.screwfix.com/is/image/ae235/881KP_P?wid=414&hei=414&dpr=on"
           alt="Second slide"
         />
         <Carousel.Caption>
@@ -27,8 +27,8 @@ function DarkVariantExample() {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block w-100"
-          src="holder.js/800x400?text=Third slide&bg=e5e5e5"
+          className="d-block w-70 m-auto pb-50"
+          src="https://media.screwfix.com/is/image/ae235/355JJ_P?wid=414&hei=414&dpr=on"
           alt="Third slide"
         />
         <Carousel.Caption>
@@ -42,4 +42,3 @@ function DarkVariantExample() {
   );
 }
 
-export default DarkVariantExample;

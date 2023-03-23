@@ -1,34 +1,43 @@
 // import logo from './logo.svg';
 // import './App.css';
 
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import { AuthProvider } from './contexts/AuthContext';
+
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BasicExample from './components/BasicExample';
-import DarkVariantExample from './components/CarouselComponent';
+import { CarouselItems } from './components/CarouselItems/CarouselItems';
+import { Login } from './components/Login/Login';
+import { Register } from './components/Register/Register';
+import { Logout } from './components/Logout/Logout';
 
 function App() {
-  return (
-    <>
-      <BasicExample/>
-      <DarkVariantExample/>
-    </>
 
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header>
-    // </div>
-  );
+    const contextValues = {
+        // onLoginSubmit,
+        // onRegisterSubmit,
+        // onLogout,
+        // userId: auth._id,
+        // token: auth.accessToken,
+        // userEmail: auth.email,
+        // isAuthenticated: !!auth.accessToken,
+    };
+
+    return (
+                <BrowserRouter>
+        <AuthProvider> 
+            <BasicExample />
+            <Routes>
+                <Route path='/' element={<CarouselItems/>} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/logout' element={<Logout />} />
+                <Route path='/register' element={<Register />} />
+            </Routes>
+        </AuthProvider>
+            </BrowserRouter>
+    );
 }
 
 export default App;
