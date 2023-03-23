@@ -20,6 +20,7 @@ export const Register = () => {
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
                         type="email"
+                        name="email"
                         value={values.email}
                         onChange={changeHandler}
                         placeholder="Enter email" />
@@ -30,6 +31,7 @@ export const Register = () => {
                     <Form.Control
                         type="password"
                         placeholder="Password"
+                        name="password"
                         value={values.password}
                         onChange={changeHandler} />
                 </Form.Group>
@@ -37,6 +39,7 @@ export const Register = () => {
                     <Form.Label>Confirm password</Form.Label>
                     <Form.Control
                         type="password"
+                        name="confirmPassword"
                         placeholder="Confirm password"
                         value={values.confirmPassword}
                         onChange={changeHandler} />
