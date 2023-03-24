@@ -13,6 +13,9 @@ import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
 import { Logout } from './components/Logout/Logout';
 import { AddTool } from './components/Tool/AddTool'
+import { AllTools } from './components/Tools/AllTools';
+import { ToolDetails } from './components/Tools/ToolDetails';
+import { EditTool } from './components/Tools/EditTool';
 
 function App() {
 
@@ -26,6 +29,8 @@ function App() {
         // isAuthenticated: !!auth.accessToken,
     };
 
+
+    
     return (
                 <BrowserRouter>
         <AuthProvider> 
@@ -36,6 +41,9 @@ function App() {
                 <Route path='/logout' element={<Logout />} />
                 <Route path='/register' element={<Register />} />
                 <Route path='/add-tool' element={<AddTool />} />
+                <Route path='/tools' element={<AllTools />} />
+                <Route path='/details/:toolId' element={<ToolDetails />} />
+                <Route path='/edit/:toolId' element={<EditTool />} />
             </Routes>
         </AuthProvider>
             </BrowserRouter>

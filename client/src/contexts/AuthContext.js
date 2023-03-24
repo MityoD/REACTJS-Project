@@ -4,7 +4,7 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 
 // import { authServiceFactory } from '../services/authService';
 import { login , logout, register, addTool} from '../services/userService';
-
+import {edit} from '../services/toolService'
 export const AuthContext = createContext();
 
 export const AuthProvider = ({
@@ -60,6 +60,10 @@ export const AuthProvider = ({
             console.log('There is a problem');
         }
     };
+
+    
+ 
+    
 
 
     const contextValues = {
