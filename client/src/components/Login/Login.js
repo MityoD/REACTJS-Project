@@ -41,7 +41,7 @@ export const Login = () => {
                         onChange={changeHandler}
                         placeholder="Password" />
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <Button className="btn" variant="primary" type="submit">
                     Login
                 </Button>
             </Form>

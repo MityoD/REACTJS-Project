@@ -4,7 +4,8 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 
 // import { authServiceFactory } from '../services/authService';
 import { login , logout, register, addTool} from '../services/userService';
-import {edit} from '../services/toolService'
+
+
 export const AuthContext = createContext();
 
 export const AuthProvider = ({
@@ -51,11 +52,11 @@ export const AuthProvider = ({
 
     const onAddToolSubmit = async (data) => {
         try {
-            const result = await addTool(data, auth.accessToken);
+            const result = await addTool('/tools', data, auth.accessToken);
 
             //setAuth(result);
 
-            navigate('/');
+            navigate('/tools/my-tools');
         } catch (error) {
             console.log('There is a problem');
         }
@@ -73,10 +74,10 @@ export const AuthProvider = ({
         onAddToolSubmit,
         userId: auth._id,
         token: auth.accessToken,
+        role: auth.role,
         userEmail: auth.email,
         isAuthenticated: !!auth.accessToken,
     };
-
     return (
         <>
             <AuthContext.Provider value={contextValues}>

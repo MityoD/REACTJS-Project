@@ -1322,17 +1322,51 @@
         users: {
             "35c62d76-8152-4626-8712-eeb96381bea8": {
                 email: "peter@abv.bg",
-                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1",
+                role: "guest"
             },
             "847ec027-f659-4086-8032-5173e2f9c93a": {
                 email: "john@abv.bg",
-                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1",
+                role: "guest"
+            },
+            "847ec027-4086-8032-f659-eeb96381bea8": {
+                email: "owner@abv.bg",
+                hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1",
+                role: "owner"
             }
+
         },
         sessions: {
         }
     };
     var seedData = {
+        products: {
+            "ff436770-40e2-76c5-b231-77409eda7a61": {
+                "_ownerId": "847ec027-4086-8032-f659-eeb96381bea8",
+                "title": "Longi",
+                "category": "panels",
+                "imageUrl": "https://solarsolution.bg/wp-content/uploads/2022/12/solar-2.png",
+                "summary": "Max power: 545W, Weight : 27.5kg, Connection: MC4",
+                "_createdOn": 1617194128618,
+            },
+            "1840a313-416a-225c-817a-9954d4609f7c": {
+                "_ownerId": "847ec027-4086-8032-f659-eeb96381bea8",
+                "title": "Huawei",
+                "category": "invertors",
+                "imageUrl": "https://solarsolution.bg/wp-content/uploads/2022/03/huawei_sun2000-30_36_40ktl-m3.png",
+                "summary": "Max PV power: 15000 W, Max Vin: 1100V, Weight: 43kg, Size: 640 x 530 x 270 mm",
+                "_createdOn": 1617194210928,
+            },
+            "126777f5-42ad-3277-b874-76d043b069cb": {
+                "_ownerId": "847ec027-4086-8032-f659-eeb96381bea8",
+                "title": "Ground construction",
+                "category": "constructions",
+                "imageUrl": "https://solarsolution.bg/wp-content/uploads/2023/01/%D0%97%D0%B5%D0%BC%D0%BD%D0%B0-%D0%BA%D0%BE%D0%BD%D1%81%D1%82%D1%80%D1%83%D0%BA%D1%86%D0%B8%D1%8F-1.jpg",
+                "summary": "Aluminium ground construction",
+                "_createdOn": 1617194295474,
+            }
+        },
         tools: {
             "ff436770-76c5-40e2-b231-77409eda7a61": {
                 "_ownerId": "35c62d76-8152-4626-8712-eeb96381bea8",
@@ -1392,7 +1426,7 @@
             }
         },
         comments: {
-        
+
         }
     };
     var rules$1 = {

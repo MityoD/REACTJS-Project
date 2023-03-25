@@ -4,33 +4,36 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { AuthContext } from '../contexts/AuthContext';
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 
-function BasicExample() {
+function Navigation() {
 
   const { isAuthenticated, userEmail } = useContext(AuthContext);
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar sticky="top" bg="dark" variant="dark" expand="lg" style={{marginBottom:"20px"}}>
       <Container>
-        <Navbar.Brand href="/">Cotractors Hub</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">Solar Solutions</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/tools">Tools</Nav.Link>
-            <Nav.Link href="/jobs">Jobs</Nav.Link>
-            <Nav.Link href="/contractors">Contractors</Nav.Link>
-            <Nav.Link href="/add-tool">Add tool</Nav.Link>
-
-            {isAuthenticated ?
+            <Nav.Link as={Link} to="/products/all">Products</Nav.Link>
+            <Nav.Link as={Link} to="/projects">Projects</Nav.Link>
+            <Nav.Link as={Link} to="/tools">Tools</Nav.Link>
+            <Nav.Link as={Link} to="/contractors">Contractors</Nav.Link>
+            <Nav.Link as={Link} to="/questions">Q&A</Nav.Link>
+          </Nav>
+          <Nav>
+          {isAuthenticated ?
               <>
-                <span style={{ marginLeft: '35em', marginTop:'auto', marginBottom:'auto' }} >{userEmail}</span>
-                <Nav.Link href="/logout">Logout</Nav.Link>
+                <Nav.Link as={Link} to="/">{userEmail}</Nav.Link>
+                <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
               </>
             :
               <>
-                <Nav.Link style={{ marginLeft: '35em' }} href="/login">Login</Nav.Link>
-                <Nav.Link href="/register">Register</Nav.Link>
+                <Nav.Link  as={Link} to="/login">Login</Nav.Link>
+                <Nav.Link as={Link} to="/register">Register</Nav.Link>
               </>
             }
 
@@ -52,4 +55,4 @@ function BasicExample() {
   );
 }
 
-export default BasicExample;
+export default Navigation;

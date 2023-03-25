@@ -1,7 +1,6 @@
 const baseUrl = `http://localhost:3030/users`;
 
 export const login = async (data) => {
-    console.log(data);
     const response = await fetch(`${baseUrl}/login`, {
         method: 'POST',
         headers: {
@@ -10,7 +9,6 @@ export const login = async (data) => {
         body: JSON.stringify(data)
     })
     const result = await response.json();
-    console.log(result)
     return result;
 };
 
@@ -23,7 +21,6 @@ export const register = async (data) => {
         body: JSON.stringify(data)
     })
     const result = await response.json();
-    console.log(result)
     return result;
 };
 
@@ -38,8 +35,8 @@ export const logout = async (token) => {
 };
 
 
-export const addTool = async (data, token) => {
-    const response = await fetch(`http://localhost:3030/data/tools`, {
+export const addTool = async (url, data, token) => {
+    const response = await fetch(`http://localhost:3030/data/${url}`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
@@ -48,6 +45,5 @@ export const addTool = async (data, token) => {
         body: JSON.stringify(data)
     })
     const result = await response.json();
-    console.log(result)
     return result;
 };

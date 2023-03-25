@@ -28,7 +28,7 @@ export const EditTool = () => {
 
             //setAuth(result);
 
-            navigate('/tools');
+            navigate(`/tools/details/${toolId}`);
         } catch (error) {
             console.log(error);
             console.log('There is a problem');

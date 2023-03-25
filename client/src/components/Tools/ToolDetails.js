@@ -10,12 +10,12 @@ export const ToolDetails = () => {
     const [tool, setTool] = useState({});
     const { userId, isAuthenticated } = useAuthContext();
     const userIsOwner = userId === tool._ownerId;
-    console.log(userId);
-    console.log(isAuthenticated)
+    // console.log(userId);
+    // console.log(isAuthenticated)
     useEffect(() => {
         getOne(toolId).then(x => { setTool(x) });
     }, [toolId]);
-    
+
     return (
         <Card style={{ width: '18rem', margin: '40px auto' }}>
             <Card.Img variant="top" src="https://media.screwfix.com/is/image/ae235/412XT_P?wid=414&hei=414&dpr=on" />
@@ -25,13 +25,12 @@ export const ToolDetails = () => {
                     Some quick example text to build on the card title and make up the
                     bulk of the card's content.
                 </Card.Text>
-                {userIsOwner && 
-                <>
-                    <Button variant="primary" href={`/edit/${tool._id}`}>Edit</Button>
-                    <Button variant="primary" href={`/delete/${tool._id}`}>Delete</Button>
-                </>
+                {userIsOwner &&
+                    <>
+                        <Button className='m-1' variant="secondary" as={Link} to={`/tools/edit/${tool._id}`}>Edit</Button>
+                        <Button variant="danger" as={Link} to={`/tools/delete/${tool._id}`}>Delete</Button>
+                    </>
                 }
-                {/* <Button variant="primary" href={`/details/${_id}`}>Details</Button> */}
             </Card.Body>
         </Card>
     );
