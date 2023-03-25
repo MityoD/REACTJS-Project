@@ -14,7 +14,7 @@ export const AllTools = () => {
                 setTools(result)
             })
     }, []);
-    const { userId } = useAuthContext();
+    const { userId , token} = useAuthContext();
 
     var data = useLocation().pathname.split('/').slice(-1).toString();
 
@@ -24,8 +24,8 @@ export const AllTools = () => {
         <Container fluid>
             <Row xs={1} md={2} className="g-4">
                 {data === "my-tools"
-                    ? tools.filter(x=> x._ownerId == userId).map(x => <ToolCard key={x._id} {...x} isOwner = {x._ownerId === userId}  />)
-                    : tools.map(x => <ToolCard key={x._id} {...x} isOwner = {x._ownerId === userId} />)
+                    ? tools.filter(x=> x._ownerId == userId).map(x => <ToolCard key={x._id} {...x} isOwner = {x._ownerId === userId}  userId={userId} token={token}/>)
+                    : tools.map(x => <ToolCard key={x._id} {...x} isOwner = {x._ownerId === userId} userId={userId} token={token}/>)
                 }
 
 
