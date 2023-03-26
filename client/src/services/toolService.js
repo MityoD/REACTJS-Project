@@ -31,8 +31,8 @@ export const edit = async (url,toolId, data, token) => {
     return result;
 }
 
-export const deleteTool = async (toolId, token) => {
-    await fetch(`${baseUrl}/tools/${toolId}`, {
+export const deleteTool = async (url,toolId, token) => {
+    await fetch(`${baseUrl}/${url}/${toolId}`, {
         method: 'DELETE',
         headers: {
             "Content-Type": "application/json",

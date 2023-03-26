@@ -22,6 +22,7 @@ import { AllProducts } from './components/Products/AllProducts';
 import { AddProduct } from './components/Products/AddProduct';
 import { ProductDetails } from './components/Products/ProductDetails';
 import { EditProduct } from './components/Products/EditProduct';
+import { DeleteProduct } from './components/Products/DeleteProduct';
 
 function App() {
 
@@ -41,7 +42,7 @@ function App() {
                     <Route path='/products/add' element={<AddProduct />} />
                     <Route path='/products/details/:productId' element={<ProductDetails />} />
                     <Route path='/products/edit/:productId' element={<EditProduct />} />
-                    <Route path='/products/delete/:productId' element={<ProductDetails />} />
+                    <Route path='/products/delete/:productId' element={<DeleteProduct />} />
                     <Route path='/products/panels' element={<AllProducts />} />
                     <Route path='/products/invertors' element={<AllProducts />} />
                     <Route path='/products/constructions' element={<AllProducts />} />
