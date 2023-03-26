@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useForm } from "../../hooks/useForm";
 import { getOne } from '../../services/toolService';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { edit } from '../../services/toolService';
@@ -11,11 +11,6 @@ export const EditProduct = () => {
     const { token } = useAuthContext();
     const navigate = useNavigate();
     const { productId } = useParams();
-    // const [product, setProduct] = useState({});
-    // const { userId, isAuthenticated } = useAuthContext();
-    // const userIsOwner = userId === tool._ownerId;
-    // console.log(userId);
-    // console.log(isAuthenticated)
 
     useEffect(() => {
         getOne('products', productId).then(x => { changeValues(x) });
@@ -25,9 +20,6 @@ export const EditProduct = () => {
     const onEditProductSubmit = async () => {
         try {
             const result = await edit('products',productId, values, token);
-
-            //setAuth(result);
-
             navigate(`/products/details/${productId}`);
         } catch (error) {
             console.log(error);

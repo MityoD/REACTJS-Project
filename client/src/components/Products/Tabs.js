@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext';
 
 
-export const ProductTabs = () => {
+export const Tabs = () => {
     const location = useLocation().pathname;
 
     const { isAuthenticated } = useAuthContext();

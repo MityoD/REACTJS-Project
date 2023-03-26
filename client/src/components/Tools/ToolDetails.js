@@ -15,7 +15,6 @@ export const ToolDetails = () => {
     }, [toolId]);
 
     return (
-        // style={{ width: '18rem', margin: '40px auto', padding:'0', display:'flex' }}
         <Card style={{ width: '80%',margin:'auto', display: 'flex',flexDirection:'row', justifyContent: 'space-between', alignItems: 'center' }}>
             <Card.Img style={{ width: '50%'}}variant="top" src={tool.imageUrl} />
             <Card.Body>

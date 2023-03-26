@@ -1,9 +1,7 @@
 import Carousel from 'react-bootstrap/Carousel';
 import { useEffect, useState } from 'react';
 import { getLastThree } from '../../services/toolService';
-import { CarouselItem } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import './CarouselCSS.css'
 
 export const CarouselSlide = () => {
   const [tools, setTools] = useState([])

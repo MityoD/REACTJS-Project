@@ -37,7 +37,6 @@ export const DeleteProduct = () => {
     }
     return (
         <>
-
             <Modal
                 show={show}
                 onHide={handleClose}

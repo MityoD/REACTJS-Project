@@ -1,13 +1,13 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+// import NavDropdown from 'react-bootstrap/NavDropdown';
 import { AuthContext } from '../contexts/AuthContext';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 
-function Navigation() {
+export const Navigation = () => {
 
   const { isAuthenticated, userEmail } = useContext(AuthContext);
 
@@ -54,5 +54,3 @@ function Navigation() {
     </Navbar>
   );
 }
-
-export default Navigation;

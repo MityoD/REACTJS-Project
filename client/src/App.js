@@ -1,13 +1,6 @@
-// import logo from './logo.svg';
-// import './App.css';
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 import { AuthProvider } from './contexts/AuthContext';
-
-
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Navigation from './components/Navigation';
+import { Navigation } from './components/Navigation';
 import { CarouselSlide } from './components/Carousel/CarouselSlide';
 import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
@@ -17,12 +10,13 @@ import { AllTools } from './components/Tools/AllTools';
 import { ToolDetails } from './components/Tools/ToolDetails';
 import { EditTool } from './components/Tools/EditTool';
 import { DeleteTool } from './components/Tools/DeleteTool';
-import { ProductTabs } from './components/Products/ProductsTabs';
+import { Tabs } from './components/Products/Tabs';
 import { AllProducts } from './components/Products/AllProducts';
 import { AddProduct } from './components/Products/AddProduct';
 import { ProductDetails } from './components/Products/ProductDetails';
 import { EditProduct } from './components/Products/EditProduct';
 import { DeleteProduct } from './components/Products/DeleteProduct';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 
@@ -30,14 +24,13 @@ function App() {
         <BrowserRouter>
             <AuthProvider>
                 <Navigation />
-                <ProductTabs />
+                <Tabs />
                 <Routes>
                     <Route path='/' element={<CarouselSlide />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/logout' element={<Logout />} />
                     <Route path='/register' element={<Register />} />
                     <Route path='/tools/add' element={<AddTool />} />
-                    {/* <Route path='/products' element={<ProductTabs />} /> */}
                     <Route path='/products/all' element={<AllProducts />} />
                     <Route path='/products/add' element={<AddProduct />} />
                     <Route path='/products/details/:productId' element={<ProductDetails />} />
