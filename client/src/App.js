@@ -12,7 +12,7 @@ import { CarouselSlide } from './components/Carousel/CarouselSlide';
 import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
 import { Logout } from './components/Logout/Logout';
-import { AddTool } from './components/Tool/AddTool'
+import { AddTool } from './components/Tools/AddTool'
 import { AllTools } from './components/Tools/AllTools';
 import { ToolDetails } from './components/Tools/ToolDetails';
 import { EditTool } from './components/Tools/EditTool';
@@ -20,6 +20,8 @@ import { DeleteTool } from './components/Tools/DeleteTool';
 import { ProductTabs } from './components/Products/ProductsTabs';
 import { AllProducts } from './components/Products/AllProducts';
 import { AddProduct } from './components/Products/AddProduct';
+import { ProductDetails } from './components/Products/ProductDetails';
+import { EditProduct } from './components/Products/EditProduct';
 
 function App() {
 
@@ -37,6 +39,9 @@ function App() {
                     {/* <Route path='/products' element={<ProductTabs />} /> */}
                     <Route path='/products/all' element={<AllProducts />} />
                     <Route path='/products/add' element={<AddProduct />} />
+                    <Route path='/products/details/:productId' element={<ProductDetails />} />
+                    <Route path='/products/edit/:productId' element={<EditProduct />} />
+                    <Route path='/products/delete/:productId' element={<ProductDetails />} />
                     <Route path='/products/panels' element={<AllProducts />} />
                     <Route path='/products/invertors' element={<AllProducts />} />
                     <Route path='/products/constructions' element={<AllProducts />} />

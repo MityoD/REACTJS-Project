@@ -17,7 +17,7 @@ export const CarouselSlide = () => {
     <Carousel variant="dark">
       <Carousel.Item>
         <img
-          className="d-block w-30 m-auto"
+          className="d-block w-40 m-auto"
           src={tools[0]?.imageUrl}
           alt="First slide"
         />
@@ -28,7 +28,7 @@ export const CarouselSlide = () => {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block w-30 m-auto"
+          className="d-block w-40 m-auto"
           src={tools[1]?.imageUrl}
           alt="Second slide"
         />
@@ -39,7 +39,7 @@ export const CarouselSlide = () => {
       </Carousel.Item>
       <Carousel.Item>
         <img
-          className="d-block w-30 m-auto"
+          className="d-block w-40 m-auto"
           src={tools[2]?.imageUrl}
           alt="Third slide"
         />

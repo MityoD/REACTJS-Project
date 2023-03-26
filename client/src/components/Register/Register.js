@@ -10,6 +10,7 @@ export const Register = () => {
     const { values, changeHandler, onSubmit } = useForm({
         email: '',
         password: '',
+        role:'guest',
         confirmPassword: '',
     }, onRegisterSubmit);
 

@@ -7,51 +7,48 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { edit } from '../../services/toolService';
 
-export const EditTool = () => {
+export const EditProduct = () => {
     const { token } = useAuthContext();
     const navigate = useNavigate();
-    const { toolId } = useParams();
-    // const [tool, setTool] = useState({});
+    const { productId } = useParams();
+    // const [product, setProduct] = useState({});
     // const { userId, isAuthenticated } = useAuthContext();
     // const userIsOwner = userId === tool._ownerId;
     // console.log(userId);
     // console.log(isAuthenticated)
 
     useEffect(() => {
-        getOne('tools', toolId).then(x => { changeValues(x) });
-    }, [toolId]);
+        getOne('products', productId).then(x => { changeValues(x) });
+    }, [productId]);
+    
 
-
-    const onEditToolSubmit = async () => {
+    const onEditProductSubmit = async () => {
         try {
-            const result = await edit('tools', toolId, values, token);
+            const result = await edit('products',productId, values, token);
 
             //setAuth(result);
 
-            navigate(`/tools/details/${toolId}`);
+            navigate(`/products/details/${productId}`);
         } catch (error) {
             console.log(error);
             console.log('There is a problem');
         }
     };
-
+    
 
     const { values, changeHandler, onSubmit, changeValues } = useForm({
         title: '',
         category: '',
-        type: '',
+        type:'',
         price: '',
-        imageUrl: '',
-        summary: '',
-    }, onEditToolSubmit);
-
-
-
+        imageUrl:'',
+        summary:'',
+    }, onEditProductSubmit);
 
     return (
         <div style={{ width: '40%', margin: '50px auto' }}>
             <Form method="PUT" onSubmit={onSubmit}>
-                <Form.Group className="mb-3" controlId="title">
+            <Form.Group className="mb-3" controlId="title">
                     <Form.Label>Title</Form.Label>
                     <Form.Control
                         type="text"
@@ -106,7 +103,7 @@ export const EditTool = () => {
                         onChange={changeHandler} />
                 </Form.Group>
                 <Button variant="primary" type="submit">
-                    Edit tool
+                   Edit product
                 </Button>
             </Form>
         </div>

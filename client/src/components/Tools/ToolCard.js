@@ -3,39 +3,26 @@ import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 import { getLikes, likeTool, getLiked } from '../../services/toolService';
 import { useState, useEffect } from 'react'
-
+import { useAuthContext } from '../../contexts/AuthContext';
 export const ToolCard = ({
     _id,
     title,
     imageUrl,
     category,
+    type,
+    summary,
     isOwner,
     userId,
     token
 }) => {
 
     const [likes, setLikes] = useState(0);
-    const [canLike, setCanLike] = useState(true);
+    const [canLike, setCanLike] = useState(false);
 
     useEffect(() => {
+        getLiked(userId, _id, token).then(x => { setCanLike(!x) })
         getLikes(_id, token).then(x => { setLikes(x) });
-        getLiked(userId, _id, token).then(x => {setCanLike(x)})
-    }, [_id, token,userId])
-
-    // const userCanLike = async () => {
-    //     const result = await getLiked(userId, _id, token)
-    //     return !result
-    // }
-
-    // var can = awaituserCanLike();
-
-    // console.log(can)
-
-    // const userLikedTool = async () => {
-    //     const likes = await getLikes(_id,token);
-    //    console.log(likes.incudes(`_ownerId:${userId}`))
-    //     return likes.incudes(`_ownerId:${userId}`)
-    // }
+    }, [_id, token, userId])
 
     const likeClick = async () => {
         if (!isOwner) {
@@ -47,33 +34,44 @@ export const ToolCard = ({
             return
         }
     }
-
-
+    const { isAuthenticated } = useAuthContext();
 
     return (
-        <Card style={{ width: '18rem', marginLeft: '40px' }}>
-            <Card.Img variant="top" src="https://media.screwfix.com/is/image/ae235/412XT_P?wid=414&hei=414&dpr=on" />
+        <Card style={{ width: '18rem', marginLeft: '40px', padding: '0' }}>
+            <Card.Img variant="top" src={imageUrl} />
             <Card.Body>
                 <Card.Title>{title}</Card.Title>
                 <Card.Text>
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
+                    Category: {category}
                 </Card.Text>
-                <Button as={Link} to={`/tools/details/${_id}`} variant="primary">Details</Button>
+                <Card.Text>
+                    Type: {type}
+                </Card.Text>
+                {/* <Button as={Link} to={`/tools/details/${_id}`} variant="primary">Details</Button>
                 {isOwner &&
                     <>
                         <Button className='m-1' variant="secondary" as={Link} to={`/tools/edit/${_id}`}>Edit</Button>
                         <Button variant="danger" as={Link} to={`/tools/delete/${_id}`}>Delete</Button>
                     </>
-                }
+                } */}
             </Card.Body>
-            <Card.Footer style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <small className="text-muted">Liked from {likes} people</small>
+            <Card.Footer style={{ width: '100%', display: 'flex', gap:'10px', flexDirection:'column', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ width: '100%', display: 'flex', flexDirection:'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Button as={Link} to={`/tools/details/${_id}`} variant="primary" style={{ marginTop: '6px' }}>Details</Button>
+                    {isOwner &&
+                        <>
+                            <Button variant="secondary" as={Link} to={`/tools/edit/${_id}`} style={{ marginTop: '6px' }}>Edit</Button>
+                            <Button variant="danger" as={Link} to={`/tools/delete/${_id}`} style={{ marginTop: '6px' }}>Delete</Button>
+                        </>
+                    }
+                </div>
+                <div style={{ width: '100%', display: 'flex', flexDirection:'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                    <small className="text-muted" style={{marginBottom:'16px',marginTop:'16px'}}>Liked from {likes} people</small>
 
-                {canLike &&
-                    <Button className='m-1' style={{ width: '25%', marginLeft: 'auto' }} variant="warning" onClick={likeClick}>Like</Button>
-                }
-
+                    {(canLike && isAuthenticated) &&
+                        <Button  style={{ width: '25%'}} variant="warning" onClick={likeClick}>Like</Button>
+                    }
+                </div>
             </Card.Footer>
         </Card>
     );

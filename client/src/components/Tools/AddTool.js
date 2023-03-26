@@ -11,9 +11,11 @@ export const AddTool = () => {
 
     const { values, changeHandler, onSubmit } = useForm({
         title: '',
-        brand: '',
+        category: '',
+        type:'',
         price: '',
         imageUrl:'',
+        summary:'',
     }, onAddToolSubmit);
 
     if (!isAuthenticated) {
@@ -34,14 +36,22 @@ export const AddTool = () => {
                         onChange={changeHandler}
                         placeholder="Enter title" />
                 </Form.Group>
-
                 <Form.Group className="mb-3" controlId="brand">
-                    <Form.Label>Brand</Form.Label>
+                    <Form.Label>Category</Form.Label>
                     <Form.Control
                         type="text"
-                        placeholder="brand"
-                        name="brand"
-                        value={values.brand}
+                        placeholder="category"
+                        name="category"
+                        value={values.category}
+                        onChange={changeHandler} />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="brand">
+                    <Form.Label>Type</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="type"
+                        name="type"
+                        value={values.type}
                         onChange={changeHandler} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="price">
@@ -54,12 +64,21 @@ export const AddTool = () => {
                         onChange={changeHandler} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="price">
-                    <Form.Label>Price</Form.Label>
+                    <Form.Label>Image Url</Form.Label>
                     <Form.Control
                         type="text"
                         name="imageUrl"
                         placeholder="imageUrl"
                         value={values.imageUrl}
+                        onChange={changeHandler} />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="price">
+                    <Form.Label>Summary</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="summary"
+                        placeholder="summary"
+                        value={values.summary}
                         onChange={changeHandler} />
                 </Form.Group>
                 <Button variant="primary" type="submit">

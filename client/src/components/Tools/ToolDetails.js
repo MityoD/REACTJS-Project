@@ -1,29 +1,36 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { useParams, useNavigate, Link } from 'react-router-dom';
-import { useEffect, useState, useContext } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { getOne } from '../../services/toolService';
 
 export const ToolDetails = () => {
     const { toolId } = useParams();
     const [tool, setTool] = useState({});
-    const { userId, isAuthenticated } = useAuthContext();
+    const { userId } = useAuthContext();
     const userIsOwner = userId === tool._ownerId;
-    // console.log(userId);
-    // console.log(isAuthenticated)
     useEffect(() => {
-        getOne(toolId).then(x => { setTool(x) });
+        getOne('tools', toolId).then(x => { setTool(x) });
     }, [toolId]);
 
     return (
-        <Card style={{ width: '18rem', margin: '40px auto' }}>
-            <Card.Img variant="top" src="https://media.screwfix.com/is/image/ae235/412XT_P?wid=414&hei=414&dpr=on" />
+        // style={{ width: '18rem', margin: '40px auto', padding:'0', display:'flex' }}
+        <Card style={{ width: '80%',margin:'auto', display: 'flex',flexDirection:'row', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Card.Img variant="top" src={tool.imageUrl} />
             <Card.Body>
                 <Card.Title>{tool.title}</Card.Title>
                 <Card.Text>
-                    Some quick example text to build on the card title and make up the
-                    bulk of the card's content.
+                    Category: {tool.category}
+                </Card.Text>
+                <Card.Text>
+                    Type: {tool.type}
+                </Card.Text>
+                <Card.Text>
+                    Description: {tool.summary}
+                </Card.Text>
+                <Card.Text>
+                    Price: {tool.price}
                 </Card.Text>
                 {userIsOwner &&
                     <>
