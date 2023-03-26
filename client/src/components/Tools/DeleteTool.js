@@ -17,13 +17,13 @@ export const DeleteTool = () => {
     const [tool, setTool] = useState({});
 
     useEffect(() => {
-        getOne('tools',toolId).then(x => { setTool(x) });
+        getOne('tools', toolId).then(x => { setTool(x) });
     }, [toolId]);
 
 
     const onDeleteToolSubmit = async () => {
         try {
-            await deleteTool('tools',toolId, token)
+            await deleteTool('tools', toolId, token)
             navigate('/tools/my-tools');
         } catch (error) {
             console.log(error);
@@ -51,12 +51,11 @@ export const DeleteTool = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <Card style={{ width: '40%', margin: 'auto' }}>
-                        <Card.Img variant="top" src="https://media.screwfix.com/is/image/ae235/412XT_P?wid=414&hei=414&dpr=on" />
+                        <Card.Img variant="top" src={tool.imageUrl} />
                         <Card.Body>
                             <Card.Title>{tool.title}</Card.Title>
                             <Card.Text>
-                                Some quick example text to build on the card title and make up the
-                                bulk of the card's content.
+                                {tool.summary}
                             </Card.Text>
                         </Card.Body>
                     </Card>

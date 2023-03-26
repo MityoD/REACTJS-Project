@@ -8,15 +8,15 @@ import { getOne } from '../../services/toolService';
 export const ProductDetails = () => {
     const { productId } = useParams();
     const [product, setProuct] = useState({});
-    const { userId } = useAuthContext();
+    const { userId, isAuthenticated } = useAuthContext();
     const userIsOwner = userId === product._ownerId;
     useEffect(() => {
         getOne('products', productId).then(x => { setProuct(x) });
     }, [productId]);
 
     return (
-        <Card style={{ width: '80%',margin:'auto', display: 'flex',flexDirection:'row', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-            <Card.Img variant="top" src={product.imageUrl} style={{ width: '45%'}} />
+        <Card style={{ width: '80%', margin: 'auto', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+            <Card.Img variant="top" src={product.imageUrl} style={{ width: '45%' }} />
             <Card.Body>
                 <Card.Title>{product.title}</Card.Title>
                 <Card.Text>
@@ -31,14 +31,14 @@ export const ProductDetails = () => {
                 <Card.Text>
                     Price: {product.price}
                 </Card.Text>
-                {userIsOwner &&
+                {(userIsOwner && isAuthenticated) &&
                     <>
                         <Button className='m-1' variant="secondary" as={Link} to={`/products/edit/${product._id}`}>Edit</Button>
                         <Button variant="danger" as={Link} to={`/products/delete/${product._id}`}>Delete</Button>
                     </>
                 }
             </Card.Body>
-       
+
         </Card>
     );
 }

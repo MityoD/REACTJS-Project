@@ -2,12 +2,23 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useForm } from "../../hooks/useForm";
 import { useAuthContext } from "../../contexts/AuthContext";
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { addTool } from '../../services/toolService';
 
 export const AddTool = () => {
 
-    const { onAddToolSubmit, isAuthenticated } = useAuthContext();;
+    const {  isAuthenticated, token } = useAuthContext();;
+    
+    const navigate = useNavigate();
 
+    const onAddToolSubmit = async (data) => {
+        try {
+            const result = await addTool('/tools', data, token);
+            navigate('/tools/my-tools');
+        } catch (error) {
+            console.log('There is a problem');
+        }
+    };
 
     const { values, changeHandler, onSubmit } = useForm({
         title: '',

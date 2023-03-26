@@ -34,16 +34,3 @@ export const logout = async (token) => {
     })
 };
 
-
-export const addTool = async (url, data, token) => {
-    const response = await fetch(`http://localhost:3030/data/${url}`, {
-        method: 'POST',
-        headers: {
-            "Content-Type": "application/json",
-            'X-Authorization': token
-        },
-        body: JSON.stringify(data)
-    })
-    const result = await response.json();
-    return result;
-};

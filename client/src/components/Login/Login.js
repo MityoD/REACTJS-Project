@@ -2,6 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useForm } from "../../hooks/useForm";
 import { useAuthContext } from '../../contexts/AuthContext';
+import { Link } from 'react-router-dom';
 
 const LoginFormKeys = {
     Email: 'email',
@@ -44,7 +45,10 @@ export const Login = () => {
                 <Button className="btn" variant="primary" type="submit">
                     Login
                 </Button>
+                <hr/>
+                <p>Or <Link to={'/register'}>register</Link> now.</p>
             </Form>
+
         </div>
 
     );

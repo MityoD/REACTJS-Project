@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container'
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useLocation } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 export const AllTools = () => {
     const [tools, setTools] = useState([]);
     useEffect(() => {
@@ -14,21 +14,21 @@ export const AllTools = () => {
                 setTools(result)
             })
     }, []);
-    const { userId , token} = useAuthContext();
+    const { userId, token } = useAuthContext();
 
     var data = useLocation().pathname.split('/').slice(-1).toString();
 
     return (
-        // <div style={{display:'flex', justifyContent:'space-between'}} >
-        // </div>
         <Container fluid>
             <Row xs={1} md={2} className="g-4">
                 {data === "my-tools"
-                    ? tools.filter(x=> x._ownerId == userId).map(x => <ToolCard key={x._id} {...x} isOwner = {x._ownerId === userId}  userId={userId} token={token}/>)
-                    : tools.map(x => <ToolCard key={x._id} {...x} isOwner = {x._ownerId === userId} userId={userId} token={token}/>)
+                    ?
+                    tools.filter(x => x._ownerId == userId).length !== 0
+                        ?
+                        tools.filter(x => x._ownerId == userId).map(x => <ToolCard key={x._id} {...x} isOwner={x._ownerId === userId} userId={userId} token={token} />)
+                        : <h5>No Tools! <Link to={'/tools/add'}>Add</Link> one now.</h5>
+                    : tools.map(x => <ToolCard key={x._id} {...x} isOwner={x._ownerId === userId} userId={userId} token={token} />)
                 }
-
-
             </Row>
         </Container>
     )

@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import { useForm } from "../../hooks/useForm";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from 'react-router-dom';
-import { addTool } from '../../services/userService';
+import { addTool } from '../../services/toolService';
 export const AddProduct = () => {
 
     const { token } = useAuthContext();;
@@ -11,8 +11,6 @@ export const AddProduct = () => {
     const onAddProductSubmit = async (data) => {
         try {
             const result = await addTool('/products', data, token);
-            //setAuth(result);
-
             navigate('/products/all');
         } catch (error) {
             console.log('There is a problem');

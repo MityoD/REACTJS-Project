@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
 // import { authServiceFactory } from '../services/authService';
-import { login , logout, register, addTool} from '../services/userService';
+import { login , logout, register} from '../services/userService';
+import { addTool } from '../services/toolService';
 
 
 export const AuthContext = createContext();
@@ -50,17 +51,7 @@ export const AuthProvider = ({
         setAuth({});
     };
 
-    const onAddToolSubmit = async (data) => {
-        try {
-            const result = await addTool('/tools', data, auth.accessToken);
 
-            //setAuth(result);
-
-            navigate('/tools/my-tools');
-        } catch (error) {
-            console.log('There is a problem');
-        }
-    };
 
     
  
@@ -71,7 +62,6 @@ export const AuthProvider = ({
         onLoginSubmit,
         onRegisterSubmit,
         onLogout,
-        onAddToolSubmit,
         userId: auth._id,
         token: auth.accessToken,
         role: auth.role,

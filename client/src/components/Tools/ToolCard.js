@@ -68,7 +68,7 @@ export const ToolCard = ({
                 <div style={{ width: '100%', display: 'flex', flexDirection:'row', justifyContent: 'space-between', alignItems: 'center'}}>
                     <small className="text-muted" style={{marginBottom:'16px',marginTop:'16px'}}>Liked from {likes} people</small>
 
-                    {(canLike && isAuthenticated) &&
+                    {(canLike && isAuthenticated && !isOwner) &&
                         <Button  style={{ width: '25%'}} variant="warning" onClick={likeClick}>Like</Button>
                     }
                 </div>

@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import { useContext } from "react";
 import { useForm } from "../../hooks/useForm";
 import { AuthContext } from "../../contexts/AuthContext";
+import { Link } from 'react-router-dom';
 
 export const Register = () => {
 
@@ -48,6 +49,9 @@ export const Register = () => {
                 <Button variant="primary" type="submit">
                     Register
                 </Button>
+                <hr/>
+                <p>Or <Link to={'/login'}>login</Link> now.</p> 
+
             </Form>
         </div>
 
