@@ -1,5 +1,5 @@
 # REACTJS-Project
-SoftUni ReactJS Project
+SoftUni ReactJS Project - Solar Solutions
 
 ## Available Users
 
@@ -29,11 +29,25 @@ Users without registration
 
 In the project, you can find:
 
+### `Home`
+
+Carousel with the last three added tools and link for the details.
+
 ### `Products`
 
 **Owner** can apply all CRUD operations (create, read, update, delete)
 
 **Guest** & **Unauthenticated** can see products catalog and product details
+
+#### Tabs to:
+
+* All Products  
+
+* Solar panels  
+
+* Invertors  
+
+* Constructions  
 
 ### `Projects`
 
@@ -45,9 +59,17 @@ Not implemented yet.
 
 **Unauthenticated** can see tools catalog and tool details
 
+#### Tabs to:
+
+* All tools  
+
+* Add tool  - redirecting unauthenticated usert to login page.
+
+* My tools  - available for authenticated users
+
 #### `Tools Likes`
 
-**Registered** users can 'Like' an item once then the button is disabled.   
+**Registered** users can 'Like' an item once, then the button is disabled.   
 
 **Owner** of the item can not like own items.   
 
@@ -65,12 +87,29 @@ Not implemented yet.
 
 Not implemented yet.
 
-### `Used npm's`
+## Used npm's
 
-create-react-app  
+* create-react-app  
 
-react-router-dom  
+* react-router-dom  
 
-bootstrap  
+* bootstrap  
 
----react-bootstrap  
+* react-bootstrap  
+
+##  Back-End Service
+
+### `Softuni-Practice-Server`
+
+https://github.com/softuni-practice-server/softuni-practice-server#readme
+
+Added to the project folder, with seeded data for Products, Tools and Users.  
+
+
+##  Automatic page load progress bar
+
+### `pace`
+
+https://codebyzach.github.io/pace/
+
+Visible on top of the page
