@@ -73,19 +73,21 @@ Not implemented yet.
 
 **Owner** of the item can not like own items.   
 
-**All users** can see the count of likes.   
+**All users** can see the count of likes.  
 
-### `Contractors`
+#### `Add to cart`
 
-Not implemented yet.
-
-### `Q&A`
-
-Not implemented yet.
+**Registered** users without owners can add tool in the user's cart.   
 
 ### `User cart`
 
-Not implemented yet.
+#### `Cart`
+
+Display list of tools added from user.
+
+#### `Orders`
+
+Display list of user's checkout carts.
 
 ## Used npm's
 
