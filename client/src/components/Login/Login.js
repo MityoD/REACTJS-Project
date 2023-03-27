@@ -24,6 +24,7 @@ export const Login = () => {
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
+                        required
                         type="email"
                         name={LoginFormKeys.Email}
                         value={values[LoginFormKeys.Email]}
@@ -37,6 +38,7 @@ export const Login = () => {
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password"
+                        required
                         name={LoginFormKeys.Password}
                         value={values[LoginFormKeys.Password]}
                         onChange={changeHandler}
@@ -45,7 +47,7 @@ export const Login = () => {
                 <Button className="btn" variant="primary" type="submit">
                     Login
                 </Button>
-                <hr/>
+                <hr />
                 <p>Or <Link to={'/register'}>register</Link> now.</p>
             </Form>
 

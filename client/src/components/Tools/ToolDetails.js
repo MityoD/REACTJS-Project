@@ -4,19 +4,20 @@ import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { getOne } from '../../services/toolService';
+import { addItemToCart } from '../../services/orderService';
 
 export const ToolDetails = () => {
     const { toolId } = useParams();
     const [tool, setTool] = useState({});
-    const { userId } = useAuthContext();
+    const { userId, isAuthenticated, token } = useAuthContext();
     const userIsOwner = userId === tool._ownerId;
     useEffect(() => {
         getOne('tools', toolId).then(x => { setTool(x) });
     }, [toolId]);
 
     return (
-        <Card style={{ width: '80%',margin:'auto', display: 'flex',flexDirection:'row', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Card.Img style={{ width: '50%'}}variant="top" src={tool.imageUrl} />
+        <Card style={{ width: '80%', margin: 'auto', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Card.Img style={{ width: '50%' }} variant="top" src={tool.imageUrl} />
             <Card.Body>
                 <Card.Title>{tool.title}</Card.Title>
                 <Card.Text>
@@ -37,6 +38,10 @@ export const ToolDetails = () => {
                         <Button variant="danger" as={Link} to={`/tools/delete/${tool._id}`}>Delete</Button>
                     </>
                 }
+                {(isAuthenticated && !userIsOwner) &&
+                    <Button style={{ width: '100%' }} variant="success" onClick={() => addItemToCart(userId, toolId, token)}>Add to Cart</Button>
+                }
+
             </Card.Body>
         </Card>
     );

@@ -41,6 +41,7 @@ export const AddTool = () => {
                 <Form.Group className="mb-3" controlId="title">
                     <Form.Label>Title</Form.Label>
                     <Form.Control
+                        required
                         type="text"
                         name="title"
                         value={values.title}
@@ -50,6 +51,7 @@ export const AddTool = () => {
                 <Form.Group className="mb-3" controlId="brand">
                     <Form.Label>Category</Form.Label>
                     <Form.Control
+                        required
                         type="text"
                         placeholder="category"
                         name="category"
@@ -59,6 +61,7 @@ export const AddTool = () => {
                 <Form.Group className="mb-3" controlId="brand">
                     <Form.Label>Type</Form.Label>
                     <Form.Control
+                        required
                         type="text"
                         placeholder="type"
                         name="type"
@@ -68,6 +71,7 @@ export const AddTool = () => {
                 <Form.Group className="mb-3" controlId="price">
                     <Form.Label>Price</Form.Label>
                     <Form.Control
+                        required
                         type="text"
                         name="price"
                         placeholder="price"
@@ -77,6 +81,7 @@ export const AddTool = () => {
                 <Form.Group className="mb-3" controlId="price">
                     <Form.Label>Image Url</Form.Label>
                     <Form.Control
+                        required
                         type="text"
                         name="imageUrl"
                         placeholder="imageUrl"
@@ -86,6 +91,7 @@ export const AddTool = () => {
                 <Form.Group className="mb-3" controlId="price">
                     <Form.Label>Summary</Form.Label>
                     <Form.Control
+                        required
                         type="text"
                         name="summary"
                         placeholder="summary"

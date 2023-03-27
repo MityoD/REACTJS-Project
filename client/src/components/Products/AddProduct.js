@@ -31,6 +31,7 @@ export const AddProduct = () => {
                 <Form.Group className="mb-3" controlId="title">
                     <Form.Label>Title</Form.Label>
                     <Form.Control
+                        required
                         type="text"
                         name="title"
                         value={values.title}
@@ -41,6 +42,7 @@ export const AddProduct = () => {
                 <Form.Group className="mb-3" controlId="brand">
                     <Form.Label>Category</Form.Label>
                     <Form.Control
+                        required
                         type="text"
                         placeholder="category"
                         name="category"
@@ -50,6 +52,7 @@ export const AddProduct = () => {
                 <Form.Group className="mb-3" controlId="price">
                     <Form.Label>Price</Form.Label>
                     <Form.Control
+                        required
                         type="text"
                         name="price"
                         placeholder="price"
@@ -61,6 +64,7 @@ export const AddProduct = () => {
                     <Form.Control
                         type="text"
                         name="imageUrl"
+                        required
                         placeholder="price"
                         value={values.imageUrl}
                         onChange={changeHandler} />
@@ -70,6 +74,7 @@ export const AddProduct = () => {
                     <Form.Control
                         type="text"
                         name="summary"
+                        required
                         placeholder="summary"
                         value={values.summary}
                         onChange={changeHandler} />

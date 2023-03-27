@@ -21,6 +21,7 @@ export const Register = () => {
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
+                        required
                         type="email"
                         name="email"
                         value={values.email}
@@ -31,6 +32,7 @@ export const Register = () => {
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
+                        required
                         type="password"
                         placeholder="Password"
                         name="password"
@@ -40,6 +42,7 @@ export const Register = () => {
                 <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
                     <Form.Label>Confirm password</Form.Label>
                     <Form.Control
+                        required
                         type="password"
                         name="confirmPassword"
                         placeholder="Confirm password"
