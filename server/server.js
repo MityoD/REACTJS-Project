@@ -1341,6 +1341,8 @@
         }
     };
     var seedData = {
+        carts:{},
+        orders:{},
         products: {
             "ff436770-40e2-76c5-b231-77409eda7a61": {
                 "_ownerId": "847ec027-4086-8032-f659-eeb96381bea8",
