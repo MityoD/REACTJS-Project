@@ -1,6 +1,4 @@
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import { useForm } from "../../hooks/useForm";
 import { deleteTool, getOne } from '../../services/toolService';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';

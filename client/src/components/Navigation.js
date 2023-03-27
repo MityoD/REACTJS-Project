@@ -1,10 +1,11 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-// import NavDropdown from 'react-bootstrap/NavDropdown';
 import { AuthContext } from '../contexts/AuthContext';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 
 
 export const Navigation = () => {
@@ -21,13 +22,13 @@ export const Navigation = () => {
             <Nav.Link as={Link} to="/products/all">Products</Nav.Link>
             <Nav.Link as={Link} to="/projects">Projects</Nav.Link>
             <Nav.Link as={Link} to="/tools">Tools</Nav.Link>
-            <Nav.Link as={Link} to="/contractors">Contractors</Nav.Link>
-            <Nav.Link as={Link} to="/questions">Q&A</Nav.Link>
+            {/* <Nav.Link as={Link} to="/contractors">Contractors</Nav.Link> */}
+            {/* <Nav.Link as={Link} to="/questions">Q&A</Nav.Link> */}
           </Nav>
           <Nav>
           {isAuthenticated ?
               <>
-                <Nav.Link as={Link} to="/">{userEmail}</Nav.Link>
+                <Nav.Link as={Link} to="/user-cart-table"><FontAwesomeIcon icon={faCartShopping} /> {userEmail}</Nav.Link>
                 <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
               </>
             :

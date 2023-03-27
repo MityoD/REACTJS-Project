@@ -17,6 +17,9 @@ import { ProductDetails } from './components/Products/ProductDetails';
 import { EditProduct } from './components/Products/EditProduct';
 import { DeleteProduct } from './components/Products/DeleteProduct';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { UserCartTable } from './components/User/UserCartTable';
+import { UserOrders } from './components/User/UserOrders';
+import { Projects } from './components/Projects/Projects';
 
 function App() {
 
@@ -44,6 +47,9 @@ function App() {
                     <Route path='/tools/details/:toolId' element={<ToolDetails />} />
                     <Route path='/tools/edit/:toolId' element={<EditTool />} />
                     <Route path='/tools/delete/:toolId' element={<DeleteTool />} />
+                    <Route path='/user-cart-table' element={<UserCartTable />} />
+                    <Route path='/user-orders' element={<UserOrders />} />
+                    <Route path='/projects' element={<Projects />} />
                 </Routes>
             </AuthProvider>
         </BrowserRouter>

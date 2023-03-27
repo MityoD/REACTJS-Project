@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { getLikes, likeTool, getLiked } from '../../services/toolService';
 import { useState, useEffect } from 'react'
 import { useAuthContext } from '../../contexts/AuthContext';
+import { addItemToCart } from '../../services/orderService';
+
 export const ToolCard = ({
     _id,
     title,
@@ -38,6 +40,9 @@ export const ToolCard = ({
 
     return (
         <Card style={{ width: '18rem', marginLeft: '40px', padding: '0' }}>
+            {(isAuthenticated && !isOwner) &&
+                <Button style={{ width: '100%' }} variant="success" onClick={() => addItemToCart(userId, _id, token)}>Add to Cart</Button>
+            }
             <Card.Img variant="top" src={imageUrl} />
             <Card.Body>
                 <Card.Title>{title}</Card.Title>
@@ -55,8 +60,8 @@ export const ToolCard = ({
                     </>
                 } */}
             </Card.Body>
-            <Card.Footer style={{ width: '100%', display: 'flex', gap:'10px', flexDirection:'column', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ width: '100%', display: 'flex', flexDirection:'row', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Card.Footer style={{ width: '100%', display: 'flex', gap: '10px', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Button as={Link} to={`/tools/details/${_id}`} variant="primary" style={{ marginTop: '6px' }}>Details</Button>
                     {isOwner &&
                         <>
@@ -65,12 +70,13 @@ export const ToolCard = ({
                         </>
                     }
                 </div>
-                <div style={{ width: '100%', display: 'flex', flexDirection:'row', justifyContent: 'space-between', alignItems: 'center'}}>
-                    <small className="text-muted" style={{marginBottom:'16px',marginTop:'16px'}}>Liked from {likes} people</small>
+                <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <small className="text-muted" style={{ marginBottom: '16px', marginTop: '16px' }}>Liked from {likes} people</small>
 
                     {(canLike && isAuthenticated && !isOwner) &&
-                        <Button  style={{ width: '25%'}} variant="warning" onClick={likeClick}>Like</Button>
+                        <Button style={{ width: '25%' }} variant="warning" onClick={likeClick}>Like</Button>
                     }
+
                 </div>
             </Card.Footer>
         </Card>
