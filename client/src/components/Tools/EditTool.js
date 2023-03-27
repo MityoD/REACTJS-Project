@@ -81,7 +81,7 @@ export const EditTool = () => {
                 <Form.Group className="mb-3" controlId="price">
                     <Form.Label>Price</Form.Label>
                     <Form.Control
-                        type="text"
+                        type="number"
                         name="price"
                         placeholder="price"
                         value={values.price}
@@ -90,7 +90,7 @@ export const EditTool = () => {
                 <Form.Group className="mb-3" controlId="price">
                     <Form.Label>Image Url</Form.Label>
                     <Form.Control
-                        type="text"
+                        type="Url"
                         name="imageUrl"
                         placeholder="imageUrl"
                         value={values.imageUrl}

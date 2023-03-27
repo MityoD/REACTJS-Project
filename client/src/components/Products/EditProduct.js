@@ -74,7 +74,7 @@ export const EditProduct = () => {
                     <Form.Label>Price</Form.Label>
                     <Form.Control
                         required
-                        type="text"
+                        type="number"
                         name="price"
                         placeholder="price"
                         value={values.price}
@@ -84,7 +84,7 @@ export const EditProduct = () => {
                     <Form.Label>Image Url</Form.Label>
                     <Form.Control
                         required
-                        type="text"
+                        type="Url"
                         name="imageUrl"
                         placeholder="imageUrl"
                         value={values.imageUrl}

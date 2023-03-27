@@ -39,7 +39,7 @@ export const UserCartTable = () => {
                     <h5>You don't have items in the cart</h5>
                     :
                     <>
-                        <Table striped bordered hover style={{ width: '80%', margin: 'auto' }}>
+                        <Table size="sm" variant="dark" striped bordered hover style={{textAlign:'center', width: '80%', margin: 'auto' }}>
                             <thead>
                                 <tr>
                                     <th>Image</th>
@@ -53,7 +53,7 @@ export const UserCartTable = () => {
                             <tbody>
                                 {cartItems.map(x =>
                                     <tr key={x._id}>
-                                        <td><img style={{ width: '40px', borderRadius: '25px' }} src={x.imageUrl}></img></td>
+                                        <td><img style={{ width: '55px', borderRadius: '25px' }} src={x.imageUrl}></img></td>
                                         <td>{x.title}</td>
                                         <td>{x.category}</td>
                                         <td>{x.type}</td>

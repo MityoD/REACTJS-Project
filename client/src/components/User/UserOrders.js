@@ -18,7 +18,7 @@ export const UserOrders = () => {
                     ?
                     <h5>You don't have orders</h5>
                     :
-                    <Table striped bordered hover style={{ width: '80%', margin: 'auto' }}>
+                    <Table variant="dark" striped bordered hover style={{ width: '80%', margin: 'auto' }}>
                         <thead>
                             <tr>
                                 <th>Id</th>                              

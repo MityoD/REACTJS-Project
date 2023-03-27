@@ -53,7 +53,7 @@ export const AddProduct = () => {
                     <Form.Label>Price</Form.Label>
                     <Form.Control
                         required
-                        type="text"
+                        type="number"
                         name="price"
                         placeholder="price"
                         value={values.price}
@@ -62,7 +62,7 @@ export const AddProduct = () => {
                 <Form.Group className="mb-3" controlId="price">
                     <Form.Label>Image Url</Form.Label>
                     <Form.Control
-                        type="text"
+                        type="Url"
                         name="imageUrl"
                         required
                         placeholder="price"
