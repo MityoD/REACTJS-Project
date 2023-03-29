@@ -4,23 +4,29 @@ const baseUrl = 'http://localhost:3030/data/carts';
 
 export const getUserCart = async (userId, token) => {
     var cart = await getCart(userId);
-    if (cart.length === 0) {
-        cart = await createCart({items: []}, token);    
-       return cart;
+    if (!cart) {
+        cart = await createCart({ items: [] }, token);
+        return cart;
     }
-    return cart['0'];
+    return cart;
 }
 
-   export const addItemToCart = async (userId, itemId, token) => {
-    // check if item exist in cart
-        const cart = await getCart(userId)
+export const addItemToCart = async (userId, itemId, token) => {
 
-        const newItem = await getOne('tools',itemId);
+    const cart = await getUserCart(userId, token)
 
-        const items = [...cart[0].items, newItem];
+    const newItem = await getOne('tools', itemId);
 
-        await addToCart(cart[0]._id, items, token);
+    if (cart?.items.some(x => x._id === itemId)) {        
+        return {status:'existing'}
     }
+
+
+    const items = [...cart.items, newItem];
+
+    await addToCart(cart._id, items, token);
+    return {status:'added'}
+}
 
 
 
@@ -32,7 +38,7 @@ export const addToCart = async (cartId, newItems, token) => {
             "Content-Type": "application/json",
             'X-Authorization': token
         },
-        body: JSON.stringify({items: newItems})
+        body: JSON.stringify({ items: newItems })
     });
     const result = await request.json();
     return result;
@@ -40,7 +46,7 @@ export const addToCart = async (cartId, newItems, token) => {
 const getCart = async (ownerId) => {
     const request = await fetch(`${baseUrl}/likes?where=_ownerId%3D%22${ownerId}%22`);
     const result = await request.json();
-    return result;
+    return result[0];
 }
 
 const createCart = async (data, token) => {
@@ -57,7 +63,7 @@ const createCart = async (data, token) => {
 };
 //     const request = await fetch(`${baseUrl}/likes?where=toolId%3D%22${toolId}%22%20and%20_ownerId%3D%22${userId}%22&count`);
 
-export const sendOrder = async (data,token) => {
+export const sendOrder = async (data, token) => {
     const response = await fetch('http://localhost:3030/data/orders', {
         method: 'POST',
         headers: {
@@ -73,11 +79,8 @@ export const sendOrder = async (data,token) => {
 export const getUserOrders = async (ownerId) => {
     const request = await fetch(`http://localhost:3030/data/orders?where=_ownerId%3D%22${ownerId}%22`);
     const result = await request.json();
-    console.log(result)
     return result;
 }
-
-// get the right orders
 
 
 
