@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { Navigation } from './components/Navigation';
 import { CarouselSlide } from './components/Carousel/CarouselSlide';
@@ -28,7 +28,6 @@ import { ToastComponent } from './components/Alerts/ToastComponent';
 function App() {
 
     return (
-        <BrowserRouter>
             <AuthProvider>
                 <Navigation />
                 <ToastComponent />
@@ -58,7 +57,6 @@ function App() {
                 </Routes>
                 {/* <Footer /> */}
             </AuthProvider>
-        </BrowserRouter>
     );
 }
 
