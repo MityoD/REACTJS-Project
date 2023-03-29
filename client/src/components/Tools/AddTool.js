@@ -7,16 +7,19 @@ import { addTool } from '../../services/toolService';
 
 export const AddTool = () => {
 
-    const {  isAuthenticated, token } = useAuthContext();;
+    const {  isAuthenticated, token, displayToast } = useAuthContext();;
     
     const navigate = useNavigate();
 
     const onAddToolSubmit = async (data) => {
         try {
             const result = await addTool('/tools', data, token);
+
+            displayToast({title:"Tool added successfully!", show:true, bg:'success'})
+
             navigate('/tools/my-tools');
         } catch (error) {
-            console.log('There is a problem');
+            displayToast({title:"Something went wrong", show:true, bg:'danger'})
         }
     };
 

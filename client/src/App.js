@@ -1,3 +1,5 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { Navigation } from './components/Navigation';
@@ -16,10 +18,12 @@ import { AddProduct } from './components/Products/AddProduct';
 import { ProductDetails } from './components/Products/ProductDetails';
 import { EditProduct } from './components/Products/EditProduct';
 import { DeleteProduct } from './components/Products/DeleteProduct';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { UserCartTable } from './components/User/UserCartTable';
 import { UserOrders } from './components/User/UserOrders';
 import { Projects } from './components/Projects/Projects';
+import { ToastComponent } from './components/Alerts/ToastComponent';
+// import { Footer } from './components/Footer/Footer';
+
 
 function App() {
 
@@ -27,6 +31,7 @@ function App() {
         <BrowserRouter>
             <AuthProvider>
                 <Navigation />
+                <ToastComponent />
                 <Tabs />
                 <Routes>
                     <Route path='/' element={<CarouselSlide />} />
@@ -51,6 +56,7 @@ function App() {
                     <Route path='/user-orders' element={<UserOrders />} />
                     <Route path='/projects' element={<Projects />} />
                 </Routes>
+                {/* <Footer /> */}
             </AuthProvider>
         </BrowserRouter>
     );

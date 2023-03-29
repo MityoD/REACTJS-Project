@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'
 import { useAuthContext } from '../../contexts/AuthContext';
 import { addItemToCart } from '../../services/orderService';
 
+
 export const ToolCard = ({
     _id,
     title,
@@ -17,31 +18,43 @@ export const ToolCard = ({
     userId,
     token
 }) => {
-
-    const [likes, setLikes] = useState(0);
-    const [canLike, setCanLike] = useState(false);
-
     useEffect(() => {
         getLiked(userId, _id, token).then(x => { setCanLike(!x) })
         getLikes(_id, token).then(x => { setLikes(x) });
     }, [_id, token, userId])
+
+    const [likes, setLikes] = useState(0);
+    const [canLike, setCanLike] = useState(false);
+    const { isAuthenticated, displayToast } = useAuthContext();
+
 
     const likeClick = async () => {
         if (!isOwner) {
             await likeTool(token, { toolId: _id });
             setLikes(x => x + 1)
             setCanLike(false)
+            displayToast({ title: "You liked this tool!", show: true, bg: 'success' })
         } else {
-            alert("Owner can't like")
+            displayToast({ title: "Owner can't like own items!", show: true, bg: 'warning' })
             return
         }
     }
-    const { isAuthenticated } = useAuthContext();
+
+    const addItemHandler = async () => {
+        const result = await addItemToCart(userId, _id, token);
+        if (result.status === 'existing') {
+            displayToast({ title: "This tool is already in your cart!", show: true, bg: 'warning' })
+        } else {
+            displayToast({ title: "Tool added to cart!", show: true, bg: 'success' })
+        }
+    }
 
     return (
         <Card style={{ width: '18rem', marginLeft: '40px', padding: '0' }}>
             {(isAuthenticated && !isOwner) &&
-                <Button style={{ width: '100%' }} variant="success" onClick={() => addItemToCart(userId, _id, token)}>Add to Cart</Button>
+                <>
+                    <Button style={{ width: '100%' }} variant="success" onClick={addItemHandler}>Add to Cart</Button>
+                </>
             }
             <Card.Img variant="top" src={imageUrl} />
             <Card.Body>
@@ -52,13 +65,6 @@ export const ToolCard = ({
                 <Card.Text>
                     Type: {type}
                 </Card.Text>
-                {/* <Button as={Link} to={`/tools/details/${_id}`} variant="primary">Details</Button>
-                {isOwner &&
-                    <>
-                        <Button className='m-1' variant="secondary" as={Link} to={`/tools/edit/${_id}`}>Edit</Button>
-                        <Button variant="danger" as={Link} to={`/tools/delete/${_id}`}>Delete</Button>
-                    </>
-                } */}
             </Card.Body>
             <Card.Footer style={{ width: '100%', display: 'flex', gap: '10px', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>

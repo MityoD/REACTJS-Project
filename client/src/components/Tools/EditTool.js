@@ -8,30 +8,23 @@ import { useAuthContext } from '../../contexts/AuthContext';
 import { edit } from '../../services/toolService';
 
 export const EditTool = () => {
-    const { token } = useAuthContext();
+    const { token, displayToast } = useAuthContext();
     const navigate = useNavigate();
     const { toolId } = useParams();
-    // const [tool, setTool] = useState({});
-    // const { userId, isAuthenticated } = useAuthContext();
-    // const userIsOwner = userId === tool._ownerId;
-    // console.log(userId);
-    // console.log(isAuthenticated)
 
     useEffect(() => {
         getOne('tools', toolId).then(x => { changeValues(x) });
     }, [toolId]);
 
-
     const onEditToolSubmit = async () => {
         try {
             const result = await edit('tools', toolId, values, token);
-
-            //setAuth(result);
-
+            displayToast({ title: "Item edited successfully!", show: true, bg: 'success' });
             navigate('/tools/my-tools');
         } catch (error) {
             console.log(error);
-            console.log('There is a problem');
+            displayToast({ title: "Something went wrong!", show: true, bg: 'danger' });
+            navigate('/tools');
         }
     };
 
@@ -44,10 +37,6 @@ export const EditTool = () => {
         imageUrl: '',
         summary: '',
     }, onEditToolSubmit);
-
-
-
-
     return (
         <div style={{ width: '40%', margin: '50px auto' }}>
             <Form method="PUT" onSubmit={onSubmit}>

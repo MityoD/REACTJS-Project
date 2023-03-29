@@ -1,15 +1,17 @@
-import Button from 'react-bootstrap/Button';
 import { deleteTool, getOne } from '../../services/toolService';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext';
+
+import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Card from 'react-bootstrap/Card';
 
 
 
 export const DeleteTool = () => {
-    const { token } = useAuthContext();
+
+    const { token, displayToast} = useAuthContext();
     const navigate = useNavigate();
     const { toolId } = useParams();
     const [tool, setTool] = useState({});
@@ -21,11 +23,12 @@ export const DeleteTool = () => {
 
     const onDeleteToolSubmit = async () => {
         try {
-            await deleteTool('tools', toolId, token)
+            await deleteTool('tools', toolId, token);
+            displayToast({ title: "Item removed successfully!", show: true, bg: 'success' });
             navigate('/tools/my-tools');
         } catch (error) {
-            console.log(error);
-            console.log('There is a problem');
+            displayToast({ title: "Something went wrong!", show: true, bg: 'danger' });
+            navigate('/tools');
         }
     };
 
@@ -37,7 +40,6 @@ export const DeleteTool = () => {
     }
     return (
         <>
-
             <Modal
                 show={show}
                 onHide={handleClose}
