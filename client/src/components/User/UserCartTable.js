@@ -3,18 +3,26 @@ import { useEffect, useState, useRef } from 'react';
 import { useAuthContext } from '../../contexts/AuthContext';
 import * as cartService from '../../services/orderService'
 import Button from 'react-bootstrap/Button';
-
+import { GMapComponent } from '../GMapComponent/GMapComponent'
+import Form from 'react-bootstrap/Form'
 
 export const UserCartTable = () => {
-    const { token, userId, displayToast } = useAuthContext();
+    const uname = "mityo91@gmail.com";
+    const pword = "Contractors_Hub";
+
+    const { token, userId, displayToast, userEmail } = useAuthContext();
 
     const [cartItems, setCartItems] = useState([]);
+    const [cities, setCities] = useState([]);
+    const [cityId, setCityId] = useState('');
+    const [offices, setOffices] = useState([]);
+    const [officeAddress, setOfficeAddress] = useState('');
     const [total, setTotal] = useState(0);
 
     const isInitialMount = useRef(true);
 
     useEffect(() => {
-        cartService.getUserCart(userId, token).then(x => setCartItems(x.items))
+        cartService.getUserCart(userId, token).then(x => setCartItems(x.items));
     }, [userId]);
 
 
@@ -27,6 +35,10 @@ export const UserCartTable = () => {
             setTotal(price);
         }
     });
+
+    useEffect(() => {
+        loadCities().then(x => { setCities(x) })
+    }, [])
 
     const removeFromCart = async (toolId) => {
 
@@ -41,12 +53,73 @@ export const UserCartTable = () => {
         }
     };
 
-    const checkout = async () => {
+    const loadCities = async () => {
 
+
+        const citiesData = await fetch(`https://ee.econt.com/services/Nomenclatures/NomenclaturesService.getCities.json`, {
+            method: "POST",
+            headers: {
+                "Authorization": "Basic " + (uname + ":" + pword),
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ countryCode: "BGR" })
+        });
+        const data = await citiesData.json();
+        const firstCities = data.cities.slice(0, 100);
+        return firstCities
+
+    }
+
+    const selectedCity = (e) => {
+        if (e.target.value !== 'defaultCity') {
+            setCityId(e.target.value)
+            loadOffices(e.target.value)
+        }
+        setOffices([])
+        setOfficeAddress('');
+    }
+
+    const loadOffices = async (_cityId) => {
+        const offices = await fetch(`https://ee.econt.com/services/Nomenclatures/NomenclaturesService.getOffices.json`, {
+            method: "POST",
+            headers: {
+                "Authorization": "Basic " + (uname + ":" + pword),
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                countryCode: "BGR",
+                cityID: _cityId
+            })
+        });
+        const data = await offices.json();
+        const newData = [];
+        data['offices'].forEach(x => newData.push(x.address))
+        setOffices(newData)
+        setOfficeAddress('');
+    }
+
+    const selectedOffice = (e) => {
+        if (e.target.value !== 'defaultOffice') {
+            setOfficeAddress(e.target.value)
+        } else {
+            setOfficeAddress('')
+        }
+    }
+
+    const checkout = async () => {
+        if (officeAddress === '') {
+            displayToast({ title: "Select delivery address.", show: true, bg: 'warning' });
+            return
+        }
         try {
-            await cartService.sendOrder({ order_items: cartItems }, token)
+            await cartService.sendOrder({
+                order_items: cartItems,
+                user: userEmail,
+                office_address: officeAddress,
+                total_price: total,
+            }, token)
             var cart = await cartService.getUserCart(userId);
-            await cartService.addToCart(cart._id, [], token); // send empty array
+            await cartService.addToCart(cart._id, [], token);
             setCartItems([])
             displayToast({ title: "Your order is sent!", show: true, bg: 'success' });
         } catch (error) {
@@ -76,7 +149,7 @@ export const UserCartTable = () => {
                             <tbody>
                                 {cartItems?.map(x =>
                                     <tr key={x._id}>
-                                        <td><img style={{ width: '50px', borderRadius: '30px' }} src={x.imageUrl}></img></td>
+                                        <td><img style={{ width: '40px', borderRadius: '30px' }} src={x.imageUrl}></img></td>
                                         <td>{x.title}</td>
                                         <td>{x.category}</td>
                                         <td>{x.type}</td>
@@ -94,9 +167,59 @@ export const UserCartTable = () => {
                                     <td>{total}</td>
                                     <td></td>
                                 </tr>
+                                <tr>
+                                    <td colSpan={6}>Enter your delivery address:</td>
+                                </tr>
                             </tfoot>
                         </Table>
-                        <Button style={{ width: '30%', marginLeft: '35%', marginTop: '20px' }} variant="primary" onClick={checkout}>Checkout</Button>
+
+
+                        <div style={{ display: 'flex', width: '80%', margin: 'auto' }}>
+                            <GMapComponent />
+                            <Table size="sm" variant="dark" striped bordered={false} style={{ height: '300px', textAlign: 'center', fontSize: '18px' }} hover >
+                                <tbody>
+
+                                    <tr>
+                                        <td colSpan={2}>
+                                            Select city:
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan={2}>
+                                            <Form.Select size="lg" onChange={selectedCity}>
+                                                <option value='defaultCity'>Select city..</option>
+                                                {cities.map(x => <option value={x.id} key={x.nameEn}>{x.nameEn}</option>)}
+                                                {/* {cities.map(x => <option value={`${x.nameEn}@${x.id}`} key={x.nameEn}>{x.nameEn}</option> )} */}
+                                            </Form.Select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan={2}>Select Econt office:</td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan={2}>
+                                            <Form.Select size="lg" onChange={selectedOffice} >
+                                                <option value='defaultOffice'>Select Econt office</option>
+                                                {offices.length !== 0
+                                                    &&
+                                                    offices.map(x => <option key={x.fullAddressEn}>{x.fullAddressEn}</option>)
+                                                }
+                                            </Form.Select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan={2}>radio : share location</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colSpan={3}>
+                                            <Button style={{ width: '100%', margin: 'auto' }} variant="primary" onClick={checkout}>Checkout</Button>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </Table>
+                        </div>
                     </>
             }
         </>
