@@ -9,11 +9,21 @@ import { addItemToCart } from '../../services/orderService';
 export const ToolDetails = () => {
     const { toolId } = useParams();
     const [tool, setTool] = useState({});
-    const { userId, isAuthenticated, token } = useAuthContext();
+    const { userId, isAuthenticated, token, displayToast } = useAuthContext();
     const userIsOwner = userId === tool._ownerId;
     useEffect(() => {
         getOne('tools', toolId).then(x => { setTool(x) });
     }, [toolId]);
+
+    const addItemHandler = async () => {
+        const result = await addItemToCart(userId, toolId, token);
+        if (result.status === 'existing') {
+            displayToast({ title: "This tool is already in your cart!", show: true, bg: 'warning' })
+        } else {
+            displayToast({ title: "Tool added to cart!", show: true, bg: 'success' })
+        }
+    }
+
 
     return (
         <Card style={{ width: '80%', margin: 'auto', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -39,7 +49,7 @@ export const ToolDetails = () => {
                     </>
                 }
                 {(isAuthenticated && !userIsOwner) &&
-                    <Button style={{ width: '100%' }} variant="success" onClick={() => addItemToCart(userId, toolId, token)}>Add to Cart</Button>
+                    <Button style={{ width: '100%' }} variant="success" onClick={addItemHandler}>Add to Cart</Button>
                 }
 
             </Card.Body>
