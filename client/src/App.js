@@ -21,7 +21,7 @@ import { DeleteProduct } from './components/Products/DeleteProduct';
 import { UserCartTable } from './components/User/UserCartTable';
 import { UserOrders } from './components/User/UserOrders';
 import { Projects } from './components/Projects/Projects';
-import { ToastComponent } from './components/Alerts/ToastComponent';
+import { ToastComponent } from './components/Toast/ToastComponent';
 // import { Footer } from './components/Footer/Footer';
 
 
