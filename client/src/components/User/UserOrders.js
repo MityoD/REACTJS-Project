@@ -2,12 +2,11 @@ import { getUserOrders } from "../../services/orderService";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "../../contexts/AuthContext";
 import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
+import { OrderImg } from "./OrderImg";
 
 export const UserOrders = () => {
     const { userId } = useAuthContext();
     const [orders, setOrders] = useState([])
-    console.log(orders)
     useEffect(() => {
         getUserOrders(userId).then(x => { setOrders(x) })
     }, [])
@@ -18,32 +17,32 @@ export const UserOrders = () => {
                     ?
                     <h5>You don't have orders</h5>
                     :
-                    <Table variant="dark" striped bordered={ false } hover style={{ width: '80%', margin: 'auto' }}>
+                    <Table variant="dark" striped bordered={false} hover style={{ width: '80%', margin: 'auto', textAlign: 'center' }}>
                         <thead>
                             <tr>
-                                <th>Id</th>                              
+
+                                <th>Items</th>
+                                <th>Id</th>
+                                <th>Address</th>
                                 <th>Price</th>
                             </tr>
                         </thead>
                         <tbody>
                             {orders.map(x =>
                                 <tr key={x._id}>
-                                    {/* <td><img style={{ width: '40px', borderRadius: '25px' }} src={x.imageUrl}></img></td>
-                                    <td>{x.title}</td>
-                                    <td>{x.category}</td>
-                                    <td>{x.type}</td> */}
+                                    <td>
+                                        {x.order_items.map(i => <OrderImg key={i._id} imageUrl={i.imageUrl} size={'40px'}/>)}
+                                    </td>
                                     <td>{x._id}</td>
-                                    <td>{x._ownerId}</td>
-                                    {/* <td><Button style={{ margin: 'auto' }} variant="danger" onClick={() => removeFromCart(x._id)}>Remove</Button></td> */}
+                                    <td>{x.office_address}</td>
+                                    <td>{x.total_price}</td>
                                 </tr>
                             )}
                         </tbody>
                     </Table>
             }
-            {/* <Button style={{ width: '30%', marginLeft: '35%', marginTop: '20px' }} variant="primary" onClick={checkout}>Checkout</Button> */}
         </>
     );
 };
-
 
 //add status for orders
