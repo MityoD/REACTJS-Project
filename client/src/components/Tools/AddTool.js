@@ -77,6 +77,8 @@ export const AddTool = () => {
                         required
                         type="number"
                         name="price"
+                        min="0.01" 
+                        step="0.01"
                         placeholder="price"
                         value={values.price}
                         onChange={changeHandler} />
