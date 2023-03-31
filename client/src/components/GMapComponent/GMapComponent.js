@@ -1,22 +1,57 @@
-import Figure from 'react-bootstrap/Figure';
-import { Button } from 'react-bootstrap';
-import { useMemo } from 'react';
+// import { useMemo } from 'react';
 import styles from '../GMapComponent/GMapComponent.module.css'
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
+import { GoogleMap, useLoadScript, Marker, MarkerClusterer } from '@react-google-maps/api';
 
 
-export const GMapComponent = () => {
+export const GMapComponent = (
+    { markers, sharedLocation }
+) => {
+
     const { isLoaded } = useLoadScript({ googleMapsApiKey: "AIzaSyDLF9564iHLcICYZCN070CqwQoir-4pAOo" })
-    const center = useMemo(() => ({ lat: 42.866727397, lng: 25.493093396111 }), [])
+    // const center = useMemo(() => ({ lat: 42.866727397, lng: 25.493093396111 }), [])
+    var center = { lat: 42.866727397, lng: 25.493093396111 }
 
     if (!isLoaded) {
         return (<div>Loading...</div>)
     }
 
+    var zoom;
+
+    switch (true) {
+
+        case (markers.length > 20):
+            zoom = 11
+            break;
+        case (markers.length > 15):
+            zoom = 12
+            break;
+        case (markers.length > 10):
+            zoom = 13
+            break;
+        case (markers.length > 5):
+            zoom = 14
+            break;
+        case (markers.length > 0):
+            zoom = 16
+            break;
+        default:
+            zoom = 6
+    }
+
     return <GoogleMap
-        zoom={15}
-        center={center}
+        zoom={zoom}
+        center={sharedLocation ? sharedLocation : markers[0] ? markers[0] : center}
         mapContainerClassName={styles.map}>
+
+        <MarkerClusterer >
+            {(clusterer) =>
+                markers.map((location) => (
+                    <Marker key={location} position={location} clusterer={clusterer} />
+                ))
+            }
+        </MarkerClusterer>
+
+        {/* 
         <Marker
             icon={"https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"}
 
@@ -30,7 +65,8 @@ export const GMapComponent = () => {
             //     strokeWeight: 2,
             // }}
             position={{ lat: 42.866727397, lng: 25.493093396111 }}
-        />
+        /> */}
+
     </GoogleMap>
 
 }

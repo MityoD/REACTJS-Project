@@ -14,9 +14,10 @@ export const UserCartTable = () => {
 
     const [cartItems, setCartItems] = useState([]);
     const [cities, setCities] = useState([]);
-    const [cityId, setCityId] = useState('');
+    // const [cityId, setCityId] = useState('');
     const [offices, setOffices] = useState([]);
     const [officeAddress, setOfficeAddress] = useState('');
+    const [markers, setMarkers] = useState([]);
     const [total, setTotal] = useState(0);
 
     const isInitialMount = useRef(true);
@@ -72,7 +73,7 @@ export const UserCartTable = () => {
 
     const selectedCity = (e) => {
         if (e.target.value !== 'defaultCity') {
-            setCityId(e.target.value)
+            // setCityId(e.target.value)
             loadOffices(e.target.value)
         }
         setOffices([])
@@ -93,7 +94,10 @@ export const UserCartTable = () => {
         });
         const data = await offices.json();
         const newData = [];
+        const _markers = [];
         data['offices'].forEach(x => newData.push(x.address))
+        newData.forEach(x => _markers.push({lat : x.location.latitude, lng: x.location.longitude}))
+        setMarkers(_markers)
         setOffices(newData)
         setOfficeAddress('');
     }
@@ -168,14 +172,14 @@ export const UserCartTable = () => {
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td colSpan={6}>Enter your delivery address:</td>
+                                    <td colSpan={6} style={{ fontSize: '18px' }}>Select your delivery address:</td>
                                 </tr>
                             </tfoot>
                         </Table>
 
 
                         <div style={{ display: 'flex', width: '80%', margin: 'auto' }}>
-                            <GMapComponent />
+                            <GMapComponent markers={markers} sharedLocation={false}/>
                             <Table size="sm" variant="dark" striped bordered={false} style={{ height: '300px', textAlign: 'center', fontSize: '18px' }} hover >
                                 <tbody>
 
