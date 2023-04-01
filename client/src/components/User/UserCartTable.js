@@ -24,7 +24,7 @@ export const UserCartTable = () => {
 
     useEffect(() => {
         cartService.getUserCart(userId, token).then(x => setCartItems(x.items));
-    }, [userId]);
+    }, [userId, token]);
 
 
     useEffect(() => {
@@ -35,7 +35,7 @@ export const UserCartTable = () => {
             cartItems?.forEach(x => price += Number(x.price));
             setTotal(price);
         }
-    });
+    },[cartItems]); // [cartItems]???
 
     useEffect(() => {
         loadCities().then(x => { setCities(x) })
@@ -121,6 +121,7 @@ export const UserCartTable = () => {
                 user: userEmail,
                 office_address: officeAddress,
                 total_price: total,
+                isDispatched: false
             }, token)
             var cart = await cartService.getUserCart(userId);
             await cartService.addToCart(cart._id, [], token);
@@ -153,7 +154,7 @@ export const UserCartTable = () => {
                             <tbody>
                                 {cartItems?.map(x =>
                                     <tr key={x._id}>
-                                        <td><img style={{ width: '40px', borderRadius: '30px' }} src={x.imageUrl}></img></td>
+                                        <td><img style={{ width: '40px', borderRadius: '30px' }} src={x.imageUrl} alt={'alt'}></img></td>
                                         <td>{x.title}</td>
                                         <td>{x.category}</td>
                                         <td>{x.type}</td>

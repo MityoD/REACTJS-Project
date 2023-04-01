@@ -10,10 +10,10 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 
 export const Navigation = () => {
 
-  const { isAuthenticated, userEmail } = useContext(AuthContext);
+  const { isAuthenticated, userEmail, role } = useContext(AuthContext);
 
   return (
-    <Navbar sticky="top" bg="dark" variant="dark" expand="lg" style={{marginBottom:"20px"}}>
+    <Navbar sticky="top" bg="dark" variant="dark" expand="lg" style={{ marginBottom: "20px" }}>
       <Container>
         <Navbar.Brand as={Link} to="/">Solar Solutions</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -22,18 +22,19 @@ export const Navigation = () => {
             <Nav.Link as={Link} to="/products/all">Products</Nav.Link>
             <Nav.Link as={Link} to="/projects">Projects</Nav.Link>
             <Nav.Link as={Link} to="/tools">Tools</Nav.Link>
+            {role === 'owner' && <Nav.Link as={Link} to="/received-orders">Received orders</Nav.Link>}
             {/* <Nav.Link as={Link} to="/contractors">Contractors</Nav.Link> */}
             {/* <Nav.Link as={Link} to="/questions">Q&A</Nav.Link> */}
           </Nav>
           <Nav>
-          {isAuthenticated ?
+            {isAuthenticated ?
               <>
                 <Nav.Link as={Link} to="/user-cart-table"><FontAwesomeIcon icon={faCartShopping} /> {userEmail}</Nav.Link>
                 <Nav.Link as={Link} to="/logout">Logout</Nav.Link>
               </>
-            :
+              :
               <>
-                <Nav.Link  as={Link} to="/login">Login</Nav.Link>
+                <Nav.Link as={Link} to="/login">Login</Nav.Link>
                 <Nav.Link as={Link} to="/register">Register</Nav.Link>
               </>
             }

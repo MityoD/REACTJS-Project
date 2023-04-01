@@ -9,7 +9,7 @@ export const UserOrders = () => {
     const [orders, setOrders] = useState([])
     useEffect(() => {
         getUserOrders(userId).then(x => { setOrders(x) })
-    }, [])
+    }, [userId])
     return (
         <>
             {
@@ -24,6 +24,7 @@ export const UserOrders = () => {
                                 <th>Items</th>
                                 <th>Id</th>
                                 <th>Address</th>
+                                <th>Status</th>
                                 <th>Price</th>
                             </tr>
                         </thead>
@@ -31,10 +32,11 @@ export const UserOrders = () => {
                             {orders.map(x =>
                                 <tr key={x._id}>
                                     <td>
-                                        {x.order_items.map(i => <OrderImg key={i._id} imageUrl={i.imageUrl} size={'40px'}/>)}
+                                        {x.order_items?.map(i => <OrderImg key={i._id} imageUrl={i.imageUrl} size={'40px'}/>)}
                                     </td>
                                     <td>{x._id}</td>
                                     <td>{x.office_address}</td>
+                                    <td>{x.isDispatched ? 'Dispatched' : 'Pending'}</td>
                                     <td>{x.total_price}</td>
                                 </tr>
                             )}

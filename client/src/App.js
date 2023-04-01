@@ -23,6 +23,7 @@ import { UserOrders } from './components/User/UserOrders';
 import { Projects } from './components/Projects/Projects';
 import { ToastComponent } from './components/Toast/ToastComponent';
 import { Footer } from './components/Footer/Footer';
+import { AllOrdersDetails } from './components/User/AllOrdersDetails';
 
 
 function App() {
@@ -54,6 +55,8 @@ function App() {
                     <Route path='/user-cart-table' element={<UserCartTable />} />
                     <Route path='/user-orders' element={<UserOrders />} />
                     <Route path='/projects' element={<Projects />} />
+                    <Route path='/received-orders' element={<AllOrdersDetails />} />
+
                 </Routes>
                 <Footer />
             </AuthProvider>

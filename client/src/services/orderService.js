@@ -17,15 +17,15 @@ export const addItemToCart = async (userId, itemId, token) => {
 
     const newItem = await getOne('tools', itemId);
 
-    if (cart?.items.some(x => x._id === itemId)) {        
-        return {status:'existing'}
+    if (cart?.items.some(x => x._id === itemId)) {
+        return { status: 'existing' }
     }
 
 
     const items = [...cart.items, newItem];
 
     await addToCart(cart._id, items, token);
-    return {status:'added'}
+    return { status: 'added' }
 }
 
 
@@ -36,7 +36,7 @@ export const addToCart = async (cartId, newItems, token) => {
         method: 'PUT',
         headers: {
             "Content-Type": "application/json",
-            'X-Authorization': token
+            "X-Authorization": token
         },
         body: JSON.stringify({ items: newItems })
     });
@@ -54,7 +54,7 @@ const createCart = async (data, token) => {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
-            'X-Authorization': token
+            "X-Authorization": token
         },
         body: JSON.stringify(data)
     })
@@ -68,7 +68,7 @@ export const sendOrder = async (data, token) => {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
-            'X-Authorization': token
+            "X-Authorization": token
         },
         body: JSON.stringify(data)
     })
@@ -82,6 +82,27 @@ export const getUserOrders = async (ownerId) => {
     return result;
 }
 
+//owner
+
+export const getAllOrders = async () => {
+    const response = await fetch('http://localhost:3030/data/orders')
+    const orders = await response.json();
+    return orders;
+}
+
+export const markOrder = async (orderId, data, token) => {
+    const response = await fetch(`http://localhost:3030/data/orders/${orderId}`, {
+        method: 'PATCH',
+        headers: {
+            "Content-Type": "application/json",
+            "X-Authorization": token,
+            "X-Admin": true
+        },
+        body: JSON.stringify(data)
+    })
+    const result = await response.json();
+    return result;
+}
 
 
 
