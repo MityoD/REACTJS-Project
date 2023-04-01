@@ -38,6 +38,10 @@ export const GMapComponent = (
             zoom = 6
     }
 
+    function createKey(location) {
+        return location.lat + location.lng
+      }
+
     return <GoogleMap
         zoom={zoom}
         center={sharedLocation ? sharedLocation : markers[0] ? markers[0] : center}
@@ -46,7 +50,7 @@ export const GMapComponent = (
         <MarkerClusterer >
             {(clusterer) =>
                 markers.map((location) => (
-                    <Marker key={location} position={location} clusterer={clusterer} />
+                    <Marker key={createKey(location)} position={location} clusterer={clusterer}/>
                 ))
             }
         </MarkerClusterer>
