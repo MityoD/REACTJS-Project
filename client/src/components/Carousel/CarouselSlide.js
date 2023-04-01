@@ -13,7 +13,7 @@ export const CarouselSlide = () => {
   }, []);
 
   return (
-    <Carousel pause="false" variant="dark">
+    <Carousel pause="false" variant="dark" style={{ marginTop:'10%'}}>
       <Carousel.Item as={Link} to={`/tools/details/${tools[0]?._id}`}>
         <img 
           className="d-block w-40 m-auto"
