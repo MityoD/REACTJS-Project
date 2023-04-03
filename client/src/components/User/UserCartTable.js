@@ -5,11 +5,12 @@ import * as cartService from '../../services/orderService'
 import Button from 'react-bootstrap/Button';
 import { GMapComponent } from '../GMapComponent/GMapComponent'
 import Form from 'react-bootstrap/Form'
+import { shareLocation, userCoordinates, isLocated } from '../../services/locationService';
 
 export const UserCartTable = () => {
     const uname = "mityo91@gmail.com";
     const pword = "Contractors_Hub";
-
+    var _userCoordinates = userCoordinates();
     const { token, userId, displayToast, userEmail } = useAuthContext();
 
     const [cartItems, setCartItems] = useState([]);
@@ -35,7 +36,7 @@ export const UserCartTable = () => {
             cartItems?.forEach(x => price += Number(x.price));
             setTotal(price);
         }
-    },[cartItems]); // [cartItems]???
+    }, [cartItems]); // [cartItems]???
 
     useEffect(() => {
         loadCities().then(x => { setCities(x) })
@@ -55,7 +56,6 @@ export const UserCartTable = () => {
     };
 
     const loadCities = async () => {
-
 
         const citiesData = await fetch(`https://ee.econt.com/services/Nomenclatures/NomenclaturesService.getCities.json`, {
             method: "POST",
@@ -96,7 +96,7 @@ export const UserCartTable = () => {
         const newData = [];
         const _markers = [];
         data['offices'].forEach(x => newData.push(x.address))
-        newData.forEach(x => _markers.push({lat : x.location.latitude, lng: x.location.longitude}))
+        newData.forEach(x => _markers.push({ lat: x.location.latitude, lng: x.location.longitude }))
         setMarkers(_markers)
         setOffices(newData)
         setOfficeAddress('');
@@ -137,7 +137,7 @@ export const UserCartTable = () => {
             {
                 cartItems?.length === 0
                     ?
-                    <h5>You don't have items in the cart</h5>
+                    <h2 style={{textAlign:'center'}}>You don't have items in the cart</h2>
                     :
                     <>
                         <Table size="sm" variant="dark" striped bordered={false} hover style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
@@ -180,7 +180,7 @@ export const UserCartTable = () => {
 
 
                         <div style={{ display: 'flex', width: '80%', margin: 'auto' }}>
-                            <GMapComponent markers={markers} sharedLocation={false}/>
+                            <GMapComponent markers={markers} sharedLocation={_userCoordinates} />
                             <Table size="sm" variant="dark" striped bordered={false} style={{ height: '300px', textAlign: 'center', fontSize: '18px' }} hover >
                                 <tbody>
 
@@ -213,7 +213,23 @@ export const UserCartTable = () => {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colSpan={2}>radio : share location</td>
+                                        {/* <td colSpan={2}>radio : share location
+                                        </td> */}
+                                        <td colSpan={2}>
+                                            <Form.Check
+                                                type="switch"
+                                                id="custom-switch"
+                                                label="Share your location to find the nearest Econt office"
+                                                defaultChecked={isLocated}
+                                                onClick={(e) => { shareLocation(e.target) }}
+                                                // onChange={(e) => {
+                                                //     e.target.checked ? 
+                                                //     setMarkers(state => [_userCoordinates, ...state])
+                                                //         : console.log(_userCoordinates)
+
+                                                // }}
+                                            />
+                                        </td>
                                     </tr>
                                 </tbody>
                                 <tfoot>
