@@ -16,6 +16,7 @@ export const ToolCard = ({
     summary,
     isOwner,
     userId,
+    price,
     token
 }) => {
     useEffect(() => {
@@ -64,6 +65,9 @@ export const ToolCard = ({
                 </Card.Text>
                 <Card.Text>
                     Type: {type}
+                </Card.Text>
+                <Card.Text>
+                    Price: {price}
                 </Card.Text>
             </Card.Body>
             <Card.Footer style={{ width: '100%', display: 'flex', gap: '10px', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'center' }}>
