@@ -77,17 +77,27 @@ Not implemented yet.
 
 #### `Add to cart`
 
-**Registered** users without owners can add tool in the user's cart.   
+**Registered** users can add tool in the user's cart.   
 
 ### `User cart`
 
 #### `Cart`
 
-Display list of tools added from user.
+Display list of tools added from user.   
+
+Delivery addres table with loaded Econt(https://ee.econt.com/services api) offices for 100 cities in the first dropdown menu.   
+
+On selected city the available Econt offices are loaded in the second dropdown menu and the map display the offices locations with markers.   
+
+On 'Share your location to find the nearest Econt office' switch selected the browser prompts message for the user to allow the location sharing and then user location is shown on the map with 'star'. 
 
 #### `Orders`
 
-Display list of user's checkout carts.
+Display list of user's checkout carts with status for the order
+
+### `Received orders` available for owner 
+
+Display list of users orders with button to update the order status from 'Pending' to 'Dispatched'
 
 ## Used npm's
 
@@ -98,6 +108,8 @@ Display list of user's checkout carts.
 * bootstrap  
 
 * react-bootstrap  
+
+* @react-google-maps/api
 
 ##  Back-End Service
 
