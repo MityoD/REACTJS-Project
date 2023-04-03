@@ -30,7 +30,7 @@ export const shareLocation = (switchElement) => {
 }
 
 export const userCoordinates = () => {
-    if (localStorage.getItem("Lat") != null) {
+    if (localStorage.getItem("Lat") !== null) {
         const _lat = localStorage.getItem("Lat");
         const _lng = localStorage.getItem("Lng");
         const location = { lat: Number(_lat), lng: Number(_lng) };

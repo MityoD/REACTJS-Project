@@ -6,12 +6,13 @@ export const GMapComponent = (
     { markers, sharedLocation }
 ) => {
     console.log(sharedLocation)
+    // console.log(sharedLocation)
     const { isLoaded } = useLoadScript({ googleMapsApiKey: "AIzaSyDLF9564iHLcICYZCN070CqwQoir-4pAOo" })
     // const center = useMemo(() => ({ lat: 42.866727397, lng: 25.493093396111 }), [])
     var center = { lat: 42.866727397, lng: 25.493093396111 }
 
     if (!isLoaded) {
-        console.log('loading')
+        // console.log('loading')
         return (<div>Loading...</div>)
     }
 
@@ -39,7 +40,7 @@ export const GMapComponent = (
         default:
             zoom = 6
     }
-    console.log(zoom)
+    // console.log(zoom)
     function createKey(location) {
         return location.lat + location.lng
     }

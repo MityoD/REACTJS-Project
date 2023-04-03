@@ -1,16 +1,15 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { AuthContext } from '../contexts/AuthContext';
-import { useContext } from 'react';
+import { useAuthContext } from '../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons'  
 
 
 export const Navigation = () => {
 
-  const { isAuthenticated, userEmail, role } = useContext(AuthContext);
+  const { isAuthenticated, userEmail, role } = useAuthContext();
 
   return (
     <Navbar sticky="top" bg="dark" variant="dark" expand="lg" style={{ marginBottom: "20px" }}>
@@ -23,8 +22,6 @@ export const Navigation = () => {
             <Nav.Link as={Link} to="/projects">Projects</Nav.Link>
             <Nav.Link as={Link} to="/tools">Tools</Nav.Link>
             {role === 'owner' && <Nav.Link as={Link} to="/received-orders">Received orders</Nav.Link>}
-            {/* <Nav.Link as={Link} to="/contractors">Contractors</Nav.Link> */}
-            {/* <Nav.Link as={Link} to="/questions">Q&A</Nav.Link> */}
           </Nav>
           <Nav>
             {isAuthenticated ?

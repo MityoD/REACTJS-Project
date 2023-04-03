@@ -10,12 +10,11 @@ import { shareLocation, userCoordinates, isLocated } from '../../services/locati
 export const UserCartTable = () => {
     const uname = "mityo91@gmail.com";
     const pword = "Contractors_Hub";
-    var _userCoordinates = userCoordinates();
+
     const { token, userId, displayToast, userEmail } = useAuthContext();
 
     const [cartItems, setCartItems] = useState([]);
     const [cities, setCities] = useState([]);
-    // const [cityId, setCityId] = useState('');
     const [offices, setOffices] = useState([]);
     const [officeAddress, setOfficeAddress] = useState('');
     const [markers, setMarkers] = useState([]);
@@ -32,11 +31,11 @@ export const UserCartTable = () => {
         if (isInitialMount.current) {
             isInitialMount.current = false;
         } else {
-            var price = 0;
+            var price = 0; // move out?
             cartItems?.forEach(x => price += Number(x.price));
             setTotal(price);
         }
-    }, [cartItems]); // [cartItems]???
+    }, [cartItems]);
 
     useEffect(() => {
         loadCities().then(x => { setCities(x) })
@@ -73,7 +72,6 @@ export const UserCartTable = () => {
 
     const selectedCity = (e) => {
         if (e.target.value !== 'defaultCity') {
-            // setCityId(e.target.value)
             loadOffices(e.target.value)
         }
         setOffices([])
@@ -132,12 +130,24 @@ export const UserCartTable = () => {
         }
     }
 
+    // const updateMarkers = () => {     
+    //     console.log(`${isLocated} : located`)
+    //     if (isLocated) {
+    //         var _userCoordinates = userCoordinates();
+    //         setMarkers(_oldMarkers => [_userCoordinates, ..._oldMarkers])
+    //         console.log('after')
+
+    //         console.log(markers)
+    //         console.log(_userCoordinates)
+    //     }
+    // }
+
     return (
         <>
             {
                 cartItems?.length === 0
                     ?
-                    <h2 style={{textAlign:'center'}}>You don't have items in the cart</h2>
+                    <h2 style={{ textAlign: 'center' }}>You don't have items in the cart</h2>
                     :
                     <>
                         <Table size="sm" variant="dark" striped bordered={false} hover style={{ textAlign: 'center', width: '80%', margin: 'auto' }}>
@@ -180,7 +190,7 @@ export const UserCartTable = () => {
 
 
                         <div style={{ display: 'flex', width: '80%', margin: 'auto' }}>
-                            <GMapComponent markers={markers} sharedLocation={_userCoordinates} />
+                            <GMapComponent markers={userCoordinates() ? [userCoordinates(), ...markers] : markers}/>
                             <Table size="sm" variant="dark" striped bordered={false} style={{ height: '300px', textAlign: 'center', fontSize: '18px' }} hover >
                                 <tbody>
 
@@ -213,8 +223,6 @@ export const UserCartTable = () => {
                                         </td>
                                     </tr>
                                     <tr>
-                                        {/* <td colSpan={2}>radio : share location
-                                        </td> */}
                                         <td colSpan={2}>
                                             <Form.Check
                                                 type="switch"
@@ -222,12 +230,6 @@ export const UserCartTable = () => {
                                                 label="Share your location to find the nearest Econt office"
                                                 defaultChecked={isLocated}
                                                 onClick={(e) => { shareLocation(e.target) }}
-                                                // onChange={(e) => {
-                                                //     e.target.checked ? 
-                                                //     setMarkers(state => [_userCoordinates, ...state])
-                                                //         : console.log(_userCoordinates)
-
-                                                // }}
                                             />
                                         </td>
                                     </tr>
