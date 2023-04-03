@@ -16,7 +16,7 @@ export const AllOrdersDetails = () => {
     const { token, displayToast } = useAuthContext();
 
     const markAsDispatched = async (id) => {
-        const result = await markOrder(id, { "isDispatched": true }, token)   
+        const result = await markOrder(id, { "isDispatched": true }, token)
         if (result.isDispatched) {
             setOrders(state => state.map(x => x._id === id ? result : x))
             displayToast({ title: `Order: ${id} status updated!`, show: true, bg: 'success' });
@@ -30,7 +30,7 @@ export const AllOrdersDetails = () => {
             {
                 orders.length === 0
                     ?
-                    <h5>No current orders</h5>
+                        <h2 style={{textAlign:'center'}}>No current orders</h2>
                     :
                     <Table variant="dark" striped bordered={false} hover style={{ width: '100%', textAlign: 'center' }}>
                         <thead>

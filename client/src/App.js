@@ -29,37 +29,41 @@ import { AllOrdersDetails } from './components/User/AllOrdersDetails';
 function App() {
 
     return (
-            <AuthProvider>
-                <Navigation />
-                <ToastComponent />
-                <Tabs />
-                <Routes>
-                    <Route path='/' element={<CarouselSlide />} />
-                    <Route path='/login' element={<Login />} />
-                    <Route path='/logout' element={<Logout />} />
-                    <Route path='/register' element={<Register />} />
-                    <Route path='/tools/add' element={<AddTool />} />
-                    <Route path='/products/all' element={<AllProducts />} />
-                    <Route path='/products/add' element={<AddProduct />} />
-                    <Route path='/products/details/:productId' element={<ProductDetails />} />
-                    <Route path='/products/edit/:productId' element={<EditProduct />} />
-                    <Route path='/products/delete/:productId' element={<DeleteProduct />} />
-                    <Route path='/products/panels' element={<AllProducts />} />
-                    <Route path='/products/invertors' element={<AllProducts />} />
-                    <Route path='/products/constructions' element={<AllProducts />} />
-                    <Route path='/tools' element={<AllTools />} />
-                    <Route path='/tools/my-tools' element={<AllTools />} />
-                    <Route path='/tools/details/:toolId' element={<ToolDetails />} />
-                    <Route path='/tools/edit/:toolId' element={<EditTool />} />
-                    <Route path='/tools/delete/:toolId' element={<DeleteTool />} />
-                    <Route path='/user-cart-table' element={<UserCartTable />} />
-                    <Route path='/user-orders' element={<UserOrders />} />
-                    <Route path='/projects' element={<Projects />} />
-                    <Route path='/received-orders' element={<AllOrdersDetails />} />
+        <AuthProvider>
+            <div id='main-element'>
+                <div>
+                    <Navigation />
+                    <ToastComponent />
+                    <Tabs />
+                    <Routes>
+                        <Route path='/' element={<CarouselSlide />} />
+                        <Route path='/login' element={<Login />} />
+                        <Route path='/logout' element={<Logout />} />
+                        <Route path='/register' element={<Register />} />
+                        <Route path='/tools/add' element={<AddTool />} />
+                        <Route path='/products/all' element={<AllProducts />} />
+                        <Route path='/products/add' element={<AddProduct />} />
+                        <Route path='/products/details/:productId' element={<ProductDetails />} />
+                        <Route path='/products/edit/:productId' element={<EditProduct />} />
+                        <Route path='/products/delete/:productId' element={<DeleteProduct />} />
+                        <Route path='/products/panels' element={<AllProducts />} />
+                        <Route path='/products/invertors' element={<AllProducts />} />
+                        <Route path='/products/constructions' element={<AllProducts />} />
+                        <Route path='/tools' element={<AllTools />} />
+                        <Route path='/tools/my-tools' element={<AllTools />} />
+                        <Route path='/tools/details/:toolId' element={<ToolDetails />} />
+                        <Route path='/tools/edit/:toolId' element={<EditTool />} />
+                        <Route path='/tools/delete/:toolId' element={<DeleteTool />} />
+                        <Route path='/user-cart-table' element={<UserCartTable />} />
+                        <Route path='/user-orders' element={<UserOrders />} />
+                        <Route path='/projects' element={<Projects />} />
+                        <Route path='/received-orders' element={<AllOrdersDetails />} />
 
-                </Routes>
+                    </Routes>
+                </div>
                 <Footer />
-            </AuthProvider>
+            </div>
+        </AuthProvider>
     );
 }
 

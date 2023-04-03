@@ -15,7 +15,7 @@ export const UserOrders = () => {
             {
                 orders.length === 0
                     ?
-                    <h5>You don't have orders</h5>
+                    <h2 style={{textAlign:'center'}}>You don't have orders</h2>
                     :
                     <Table variant="dark" striped bordered={false} hover style={{ width: '80%', margin: 'auto', textAlign: 'center' }}>
                         <thead>
