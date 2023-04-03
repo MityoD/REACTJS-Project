@@ -84,8 +84,11 @@ Not implemented yet.
 #### `Cart`
 
 Display list of tools added from user.   
+
 Delivery addres table with loaded Econt(https://ee.econt.com/services api) offices for 100 cities in the first dropdown menu.   
+
 On selected city the available Econt offices are loaded in the second dropdown menu and the map display the offices locations with markers.   
+
 On 'Share your location to find the nearest Econt office' switch selected the browser prompts message for the user to allow the location sharing and then user location is shown on the map with 'star'. 
 
 #### `Orders`
