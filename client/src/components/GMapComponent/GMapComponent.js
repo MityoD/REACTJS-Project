@@ -1,26 +1,40 @@
-import { useState, useEffect } from 'react';
-import styles from '../GMapComponent/GMapComponent.module.css'
+import { useState, useEffect, useTransition } from 'react';
 import { GoogleMap, useLoadScript, Marker, MarkerClusterer, DirectionsRenderer } from '@react-google-maps/api';
 import { Button } from 'react-bootstrap';
 import { SphericalUtil } from "node-geometry-library";
-import Form from 'react-bootstrap/Form'
 import { shareLocation, userCoordinates } from '../../services/locationService';
+import { useAuthContext } from "../../contexts/AuthContext";
+import styles from '../GMapComponent/GMapComponent.module.css'
+import Form from 'react-bootstrap/Form'
 
 export const GMapComponent = (
     { markers }
 ) => {
-    var center = { lat: 42.866727397, lng: 25.493093396111 }
 
+    const [isPending, startTransition] = useTransition();
+
+    var center = { lat: 42.866727397, lng: 25.493093396111 }
     const { isLoaded } = useLoadScript({ googleMapsApiKey: "AIzaSyDLF9564iHLcICYZCN070CqwQoir-4pAOo" })
+
+    const { displayToast } = useAuthContext();
+
     const [distance, setDistance] = useState('0 km')
     const [duration, setDuration] = useState('0 mins')
     const [directionsResponse, setDirectionsResponse] = useState(null)
     const [isLocated, setIsLocated] = useState(false)
 
+    // useEffect(() => {
+    //     startTransition(() => {
+    //         setIsLocated(() => userCoordinates());
+    //         setIsLocated(() => userCoordinates());
+    //         console.log('loop')
+    //     });      
+    // },[])
+
     useEffect(() => {
         setTimeout(() => {
             setIsLocated(userCoordinates())
-        }, 200)
+        }, 5000)
     }, [])
 
     const calculateRoute = async (selectedMarker) => {
@@ -38,7 +52,10 @@ export const GMapComponent = (
     }
 
     const findClosestMarker = async () => {
-        if (markers.length === 0 || !isLocated) return;
+        if (markers.length === 0 || !isLocated) {
+            displayToast({ title: "Select city to view offices!", show: true, bg: 'warning' });
+            return;
+        }
         var distances = [];
         var closest = -1;
         markers.forEach((latLng, index) => {
@@ -86,9 +103,12 @@ export const GMapComponent = (
 
     const componentTest = (target) => {
         shareLocation(target)
-        setTimeout(() => {
-            setIsLocated(userCoordinates())
-        }, 200)
+        startTransition(() => {
+            setIsLocated(() => userCoordinates());
+        });
+        // setTimeout(() => {
+        //     setIsLocated(userCoordinates())
+        // }, 200)
         if (target.checked) {
             return
         }
