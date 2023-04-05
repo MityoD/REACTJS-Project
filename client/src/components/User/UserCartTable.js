@@ -1,17 +1,14 @@
-import Table from 'react-bootstrap/Table';
 import { useEffect, useState, useRef } from 'react';
 import { useAuthContext } from '../../contexts/AuthContext';
-import * as cartService from '../../services/orderService'
-import Button from 'react-bootstrap/Button';
 import { GMapComponent } from '../GMapComponent/GMapComponent'
+import * as cartService from '../../services/orderService'
+import * as econtAPI from '../../services/econtAPIservice'
+
+import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form'
-import { shareLocation, userCoordinates, isLocated } from '../../services/locationService';
 
 export const UserCartTable = () => {
-    const uname = "mityo91@gmail.com";
-    const pword = "Contractors_Hub";
-
-    const { token, userId, displayToast, userEmail } = useAuthContext();
 
     const [cartItems, setCartItems] = useState([]);
     const [cities, setCities] = useState([]);
@@ -22,23 +19,25 @@ export const UserCartTable = () => {
 
     const isInitialMount = useRef(true);
 
+    const { token, userId, displayToast, userEmail } = useAuthContext();
+
     useEffect(() => {
         cartService.getUserCart(userId, token).then(x => setCartItems(x.items));
     }, [userId, token]);
 
 
     useEffect(() => {
+        var price = 0;
         if (isInitialMount.current) {
             isInitialMount.current = false;
         } else {
-            var price = 0; // move out?
             cartItems?.forEach(x => price += Number(x.price));
             setTotal(price);
         }
     }, [cartItems]);
 
     useEffect(() => {
-        loadCities().then(x => { setCities(x) })
+        econtAPI.loadCities().then(x => { setCities(x) })
     }, [])
 
     const removeFromCart = async (toolId) => {
@@ -54,51 +53,16 @@ export const UserCartTable = () => {
         }
     };
 
-    const loadCities = async () => {
-
-        const citiesData = await fetch(`https://ee.econt.com/services/Nomenclatures/NomenclaturesService.getCities.json`, {
-            method: "POST",
-            headers: {
-                "Authorization": "Basic " + (uname + ":" + pword),
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ countryCode: "BGR" })
-        });
-        const data = await citiesData.json();
-        const firstCities = data.cities.slice(0, 100);
-        return firstCities
-
-    }
-
-    const selectedCity = (e) => {
+    const selectedCity = async (e) => {
+        setOfficeAddress('');
         if (e.target.value !== 'defaultCity') {
-            loadOffices(e.target.value)
+            const _offices = await econtAPI.loadOffices(e.target.value)
+            setOffices(_offices[0])
+            setMarkers(_offices[1])    
+            return;        
         }
         setOffices([])
-        setOfficeAddress('');
-    }
-
-    const loadOffices = async (_cityId) => {
-        const offices = await fetch(`https://ee.econt.com/services/Nomenclatures/NomenclaturesService.getOffices.json`, {
-            method: "POST",
-            headers: {
-                "Authorization": "Basic " + (uname + ":" + pword),
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                countryCode: "BGR",
-                cityID: _cityId
-            })
-        });
-        const data = await offices.json();
-        const newData = [];
-        const _markers = [];
-        data['offices'].forEach(x => newData.push(x.address))
-        newData.forEach(x => _markers.push({ lat: x.location.latitude, lng: x.location.longitude }))
-        setMarkers(_markers)
-        setOffices(newData)
-        setOfficeAddress('');
-    }
+    }  
 
     const selectedOffice = (e) => {
         if (e.target.value !== 'defaultOffice') {
@@ -129,18 +93,6 @@ export const UserCartTable = () => {
             displayToast({ title: "Something went wrong!", show: true, bg: 'danger' });
         }
     }
-
-    // const updateMarkers = () => {     
-    //     console.log(`${isLocated} : located`)
-    //     if (isLocated) {
-    //         var _userCoordinates = userCoordinates();
-    //         setMarkers(_oldMarkers => [_userCoordinates, ..._oldMarkers])
-    //         console.log('after')
-
-    //         console.log(markers)
-    //         console.log(_userCoordinates)
-    //     }
-    // }
 
     return (
         <>
@@ -188,14 +140,13 @@ export const UserCartTable = () => {
                             </tfoot>
                         </Table>
 
-
                         <div style={{ display: 'flex', width: '80%', margin: 'auto' }}>
-                            <GMapComponent markers={userCoordinates() ? [userCoordinates(), ...markers] : markers}/>
-                            <Table size="sm" variant="dark" striped bordered={false} style={{ height: '300px', textAlign: 'center', fontSize: '18px' }} hover >
+                            <GMapComponent markers={markers} />
+                            <Table size="sm" variant="dark" striped bordered={false} style={{ height: '355px', alignItems: 'center', textAlign: 'center', fontSize: '18px', width: '70%' }} hover >
                                 <tbody>
 
                                     <tr>
-                                        <td colSpan={2}>
+                                        <td style={{verticalAlign:'middle'}} colSpan={2}>
                                             Select city:
                                         </td>
                                     </tr>
@@ -204,7 +155,6 @@ export const UserCartTable = () => {
                                             <Form.Select size="lg" onChange={selectedCity}>
                                                 <option value='defaultCity'>Select city..</option>
                                                 {cities.map(x => <option value={x.id} key={x.nameEn}>{x.nameEn}</option>)}
-                                                {/* {cities.map(x => <option value={`${x.nameEn}@${x.id}`} key={x.nameEn}>{x.nameEn}</option> )} */}
                                             </Form.Select>
                                         </td>
                                     </tr>
@@ -220,17 +170,6 @@ export const UserCartTable = () => {
                                                     offices.map(x => <option key={x.fullAddressEn}>{x.fullAddressEn}</option>)
                                                 }
                                             </Form.Select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colSpan={2}>
-                                            <Form.Check
-                                                type="switch"
-                                                id="custom-switch"
-                                                label="Share your location to find the nearest Econt office"
-                                                defaultChecked={isLocated}
-                                                onClick={(e) => { shareLocation(e.target) }}
-                                            />
                                         </td>
                                     </tr>
                                 </tbody>
