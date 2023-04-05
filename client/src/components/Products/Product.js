@@ -10,8 +10,8 @@ export const Product = ({
 }) => {
     //, display:'flex', flexDirection:'column', justifyContent:'space-between', alignItems:'stretch'
     return (
-        <Card style={{ width: '18rem', marginLeft: '40px', padding: '0'}}>
-            
+        <Card style={{ width: '18rem', marginLeft: '40px', marginRight: '40px', padding: '0' }}>
+
             <Card.Img variant="top" src={imageUrl} />
             <Card.Body>
                 <Card.Title>{title}</Card.Title>
@@ -19,7 +19,7 @@ export const Product = ({
                     {category}
                 </Card.Text>
             </Card.Body>
-            
+
             <Card.Footer>
                 <Button as={Link} to={`/products/details/${_id}`} variant="primary">Details</Button>
                 {role &&

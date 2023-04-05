@@ -19,13 +19,13 @@ export const AllTools = () => {
     var data = useLocation().pathname.split('/').slice(-1).toString();
 
     return (
-        <Container fluid>
-            <Row xs={1} md={2} className="g-4">
+        <Container fluid={"sm"} >
+            <Row className="g-0" style={{justifyContent:'space-between', rowGap:'30px'}}>
                 {data === "my-tools"
                     ?
-                    tools.filter(x => x._ownerId == userId).length !== 0
+                    tools.filter(x => x._ownerId === userId).length !== 0
                         ?
-                        tools.filter(x => x._ownerId == userId).map(x => <ToolCard key={x._id} {...x} isOwner={x._ownerId === userId} userId={userId} token={token} />)
+                        tools.filter(x => x._ownerId === userId).map(x => <ToolCard key={x._id} {...x} isOwner={x._ownerId === userId} userId={userId} token={token} />)
                         : <h5>No Tools! <Link to={'/tools/add'}>Add</Link> one now.</h5>
                     : tools.map(x => <ToolCard key={x._id} {...x} isOwner={x._ownerId === userId} userId={userId} token={token} />)
                 }

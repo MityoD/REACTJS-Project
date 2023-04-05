@@ -51,7 +51,7 @@ export const ToolCard = ({
     }
 
     return (
-        <Card style={{ width: '18rem', marginLeft: '40px', padding: '0' }}>
+        <Card style={{ width: '18rem', marginLeft: '40px',  marginRight: '40px', padding: '0' }}>
             {(isAuthenticated && !isOwner) &&
                 <>
                     <Button style={{ width: '100%' }} variant="success" onClick={addItemHandler}>Add to Cart</Button>

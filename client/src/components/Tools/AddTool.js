@@ -13,10 +13,8 @@ export const AddTool = () => {
 
     const onAddToolSubmit = async (data) => {
         try {
-            const result = await addTool('/tools', data, token);
-
+            await addTool('/tools', data, token);
             displayToast({title:"Tool added successfully!", show:true, bg:'success'})
-
             navigate('/tools/my-tools');
         } catch (error) {
             displayToast({title:"Something went wrong", show:true, bg:'danger'})

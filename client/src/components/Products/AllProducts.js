@@ -18,14 +18,12 @@ export const AllProducts = () => {
     const { role } = useAuthContext();
     var category = useLocation().pathname.split('/').slice(-1).toString();
 
-    return (
-        // <div style={{display:'flex', justifyContent:'space-between'}} >
-        // </div>
+    return (       
         <>
             {role === "owner" && <Button className="mb-3" as={Link} to={`/products/add`} variant="primary" style={{ marginLeft: "40px" }}>Add Product</Button>
             }
-            <Container fluid>
-                <Row xs={1} md={2} className="g-4">
+            <Container fluid={"sm"}>
+                <Row className="g-0" style={{ justifyContent:'space-beteween', rowGap:'30px'}}>
 
                     {
                         category === "all" ?
