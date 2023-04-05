@@ -9,7 +9,7 @@ import Card from 'react-bootstrap/Card';
 
 
 export const DeleteProduct = () => {
-    const { token } = useAuthContext();
+    const { token, displayToast } = useAuthContext();
     const navigate = useNavigate();
     const { productId } = useParams();
     const [product, setProduct] = useState({});
@@ -22,10 +22,10 @@ export const DeleteProduct = () => {
     const onDeleteToolSubmit = async () => {
         try {
             await deleteTool('products', productId, token);
+            displayToast({ title: "Tool deleted successfully!", show: true, bg: 'success' });
             navigate('/products/all');
         } catch (error) {
-            console.log(error);
-            console.log('There is a problem');
+            displayToast({ title: "Something went wrong!", show: true, bg: 'danger' });
         }
     };
 

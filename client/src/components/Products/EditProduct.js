@@ -8,39 +8,41 @@ import { useAuthContext } from '../../contexts/AuthContext';
 import { edit } from '../../services/toolService';
 
 export const EditProduct = () => {
-    const { token } = useAuthContext();
+    const { token, displayToast } = useAuthContext();
     const navigate = useNavigate();
     const { productId } = useParams();
 
-    useEffect(() => {
-        getOne('products', productId).then(x => { changeValues(x) });
-    }, [productId]);
-    
-
     const onEditProductSubmit = async () => {
         try {
-            const result = await edit('products',productId, values, token);
+            await edit('products', productId, values, token);
+            displayToast({ title: "Product edited successfully!", show: true, bg: 'success' });
             navigate(`/products/details/${productId}`);
         } catch (error) {
-            console.log(error);
-            console.log('There is a problem');
+            displayToast({ title: "Something went wrong!", show: true, bg: 'danger' });
         }
     };
-    
 
     const { values, changeHandler, onSubmit, changeValues } = useForm({
         title: '',
         category: '',
-        type:'',
+        type: '',
         price: '',
-        imageUrl:'',
-        summary:'',
+        imageUrl: '',
+        summary: '',
     }, onEditProductSubmit);
+
+    useEffect(() => {
+        getOne('products', productId).then(x => { changeValues(x) });
+    }, [productId]);// eslint-disable-line react-hooks/exhaustive-deps
+
+
+
+
 
     return (
         <div style={{ width: '40%', margin: '50px auto' }}>
             <Form method="PUT" onSubmit={onSubmit}>
-            <Form.Group className="mb-3" controlId="title">
+                <Form.Group className="mb-3" controlId="title">
                     <Form.Label>Title</Form.Label>
                     <Form.Control
                         required
@@ -101,7 +103,7 @@ export const EditProduct = () => {
                         onChange={changeHandler} />
                 </Form.Group>
                 <Button variant="primary" type="submit">
-                   Edit product
+                    Edit product
                 </Button>
             </Form>
         </div>

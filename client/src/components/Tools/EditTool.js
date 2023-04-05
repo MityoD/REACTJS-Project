@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useForm } from "../../hooks/useForm";
 import { getOne } from '../../services/toolService';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { edit } from '../../services/toolService';
@@ -12,23 +12,19 @@ export const EditTool = () => {
     const navigate = useNavigate();
     const { toolId } = useParams();
 
-    useEffect(() => {
-        getOne('tools', toolId).then(x => { changeValues(x) });
-    }, [toolId]);
-
+    
     const onEditToolSubmit = async () => {
         try {
-            const result = await edit('tools', toolId, values, token);
-            displayToast({ title: "Item edited successfully!", show: true, bg: 'success' });
+            await edit('tools', toolId, values, token);
+            displayToast({ title: "Tool edited successfully!", show: true, bg: 'success' });
             navigate('/tools/my-tools');
         } catch (error) {
-            console.log(error);
             displayToast({ title: "Something went wrong!", show: true, bg: 'danger' });
             navigate('/tools');
         }
     };
-
-
+    
+    
     const { values, changeHandler, onSubmit, changeValues } = useForm({
         title: '',
         category: '',
@@ -37,6 +33,11 @@ export const EditTool = () => {
         imageUrl: '',
         summary: '',
     }, onEditToolSubmit);
+
+    useEffect(() => {
+        getOne('tools', toolId).then(x => { changeValues(x) });
+    }, [toolId]); // eslint-disable-line react-hooks/exhaustive-deps
+
     return (
         <div style={{ width: '40%', margin: '50px auto' }}>
             <Form method="PUT" onSubmit={onSubmit}>

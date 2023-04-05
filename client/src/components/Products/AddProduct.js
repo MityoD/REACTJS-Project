@@ -6,14 +6,16 @@ import { useNavigate } from 'react-router-dom';
 import { addTool } from '../../services/toolService';
 export const AddProduct = () => {
 
-    const { token } = useAuthContext();;
+    const { token, displayToast } = useAuthContext();;
     const navigate = useNavigate();
     const onAddProductSubmit = async (data) => {
         try {
-            const result = await addTool('/products', data, token);
+            await addTool('/products', data, token);
+            displayToast({ title: "Product added successfully!", show: true, bg: 'success' });
             navigate('/products/all');
         } catch (error) {
-            console.log('There is a problem');
+
+            displayToast({ title: "Something went wrong!", show: true, bg: 'danger' });
         }
     };
 

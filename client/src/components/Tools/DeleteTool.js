@@ -24,7 +24,7 @@ export const DeleteTool = () => {
     const onDeleteToolSubmit = async () => {
         try {
             await deleteTool('tools', toolId, token);
-            displayToast({ title: "Item removed successfully!", show: true, bg: 'success' });
+            displayToast({ title: "Tool deleted successfully!", show: true, bg: 'success' });
             navigate('/tools/my-tools');
         } catch (error) {
             displayToast({ title: "Something went wrong!", show: true, bg: 'danger' });
