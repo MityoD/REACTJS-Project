@@ -91,6 +91,8 @@ On selected city the available Econt offices are loaded in the second dropdown m
 
 On 'Share your location to find the nearest Econt office' switch selected the browser prompts message for the user to allow the location sharing and then user location is shown on the map with 'star'. 
 
+When location is shared and city is selected the map displays all available Econt offices with markers, onClick on the marker show the direction, distance and time. Button `Find nearest office` is available and it finds the closest office to the user's location.
+
 #### `Orders`
 
 Display list of user's checkout carts with status for the order
