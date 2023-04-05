@@ -5,6 +5,11 @@ const clearLocation = () => {
     }
 }
 
+// const options = {
+//     enableHighAccuracy: true,
+//     timeout: 2000
+// }
+
 const getLocation = () => {
     if (!navigator.geolocation) {
         alert('Geolocation API not supported by this browser.');
@@ -12,6 +17,8 @@ const getLocation = () => {
         navigator.geolocation.getCurrentPosition(success, error);
     }
 }
+
+
 const success = (position) => {
     localStorage.setItem("Lat", position.coords.latitude);
     localStorage.setItem("Lng", position.coords.longitude);
