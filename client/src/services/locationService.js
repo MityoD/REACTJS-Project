@@ -1,47 +1,23 @@
-const clearLocation = () => {
-    if (localStorage.getItem("Lat") != null) {
-        localStorage.removeItem("Lat");
-        localStorage.removeItem("Lng");
-    }
-}
-
-// const options = {
-//     enableHighAccuracy: true,
-//     timeout: 2000
-// }
-
-const getLocation = () => {
-    if (!navigator.geolocation) {
-        alert('Geolocation API not supported by this browser.');
-    } else {
-        navigator.geolocation.getCurrentPosition(success, error);
-    }
-}
-
-
-const success = (position) => {
-    localStorage.setItem("Lat", position.coords.latitude);
-    localStorage.setItem("Lng", position.coords.longitude);
-}
-const error = () => {
-    alert("Geolocation permission has been blocked as the user has dismissed the permission prompt several times. This can be reset in Page Info which can be accessed by clicking the lock icon next to the URL.");
-    document.getElementById("location").checked = false;
-}
-
-export const shareLocation = (switchElement) => {
-    if (switchElement.checked) {
-        getLocation();
-    } else {
-        clearLocation();
-    }
-}
-
-export const userCoordinates = () => {
-    if (localStorage.getItem("Lat") !== null) {
-        const _lat = localStorage.getItem("Lat");
-        const _lng = localStorage.getItem("Lng");
-        const location = { lat: Number(_lat), lng: Number(_lng) };
-        return location
-    }
-    return false;
-}
+export const getUserLocation = () => {
+    return new Promise((resolve, reject) => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const userLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude,
+                    };
+                    resolve(userLocation);
+                },
+                (error) => {
+                    document.getElementById("location").checked = false;
+                    alert(error.message + '\nGeolocation permission has been blocked as the user has dismissed the permission prompt several times. This can be reset in Page Info which can be accessed by clicking the lock icon next to the URL.');
+                    resolve(false);
+                }
+            );
+        } else {
+            console.error('Geolocation is not supported by this browser.');
+            resolve(false);
+        }
+    });
+};
