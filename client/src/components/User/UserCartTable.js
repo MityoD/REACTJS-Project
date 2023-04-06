@@ -10,7 +10,7 @@ import Form from 'react-bootstrap/Form'
 
 export const UserCartTable = () => {
 
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItems, setCartItems] = useState(null);
     const [cities, setCities] = useState([]);
     const [offices, setOffices] = useState([]);
     const [officeAddress, setOfficeAddress] = useState('');

@@ -6,14 +6,14 @@ import { OrderImg } from "./OrderImg";
 
 export const UserOrders = () => {
     const { userId } = useAuthContext();
-    const [orders, setOrders] = useState([])
+    const [orders, setOrders] = useState(null)
     useEffect(() => {
         getUserOrders(userId).then(x => { setOrders(x) })
     }, [userId])
     return (
         <>
             {
-                orders.length === 0
+                orders?.length === 0
                     ?
                     <h2 style={{textAlign:'center'}}>You don't have orders</h2>
                     :
@@ -29,7 +29,7 @@ export const UserOrders = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {orders.map(x =>
+                            {orders?.map(x =>
                                 <tr key={x._id}>
                                     <td>
                                         {x.order_items?.map(i => <OrderImg key={i._id} imageUrl={i.imageUrl} size={'40px'}/>)}
