@@ -20,7 +20,7 @@ export const AllTools = () => {
 
     return (
         <Container fluid={"sm"} >
-            <Row className="g-0" style={{justifyContent:'space-between', rowGap:'30px'}}>
+            <Row className="g-0" style={{ rowGap:'30px'}}>
                 {data === "my-tools"
                     ?
                     tools.filter(x => x._ownerId === userId).length !== 0

@@ -23,7 +23,7 @@ export const AllProducts = () => {
             {role === "owner" && <Button className="mb-3" as={Link} to={`/products/add`} variant="primary" style={{ marginLeft: "40px" }}>Add Product</Button>
             }
             <Container fluid={"sm"}>
-                <Row className="g-0" style={{ justifyContent:'space-beteween', rowGap:'30px'}}>
+                <Row className="g-0" style={{ rowGap:'30px'}}>
 
                     {
                         category === "all" ?

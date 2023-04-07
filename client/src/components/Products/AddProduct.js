@@ -58,10 +58,12 @@ export const AddProduct = () => {
                         type="number"
                         name="price"
                         placeholder="price"
+                        min="0.01" 
+                        step="0.01"
                         value={values.price}
                         onChange={changeHandler} />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="price">
+                <Form.Group className="mb-3" controlId="imageUrl">
                     <Form.Label>Image Url</Form.Label>
                     <Form.Control
                         type="Url"
@@ -71,7 +73,7 @@ export const AddProduct = () => {
                         value={values.imageUrl}
                         onChange={changeHandler} />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="price">
+                <Form.Group className="mb-3" controlId="summary">
                     <Form.Label>Summary</Form.Label>
                     <Form.Control
                         type="text"

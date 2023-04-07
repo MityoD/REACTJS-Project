@@ -31,7 +31,7 @@ export const AddTool = () => {
     }, onAddToolSubmit);
 
     if (!isAuthenticated) {
-        alert('login to add tool')
+        alert('Login to add tool')
         return (
             <Navigate to="/login" />
         )
@@ -49,7 +49,7 @@ export const AddTool = () => {
                         onChange={changeHandler}
                         placeholder="Enter title" />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="brand">
+                <Form.Group className="mb-3" controlId="category">
                     <Form.Label>Category</Form.Label>
                     <Form.Control
                         required
@@ -59,7 +59,7 @@ export const AddTool = () => {
                         value={values.category}
                         onChange={changeHandler} />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="brand">
+                <Form.Group className="mb-3" controlId="type">
                     <Form.Label>Type</Form.Label>
                     <Form.Control
                         required
@@ -81,7 +81,7 @@ export const AddTool = () => {
                         value={values.price}
                         onChange={changeHandler} />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="price">
+                <Form.Group className="mb-3" controlId="imageUrl">
                     <Form.Label>Image Url</Form.Label>
                     <Form.Control
                         required
@@ -91,7 +91,7 @@ export const AddTool = () => {
                         value={values.imageUrl}
                         onChange={changeHandler} />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="price">
+                <Form.Group className="mb-3" controlId="summary">
                     <Form.Label>Summary</Form.Label>
                     <Form.Control
                         required
