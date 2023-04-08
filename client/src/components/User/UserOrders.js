@@ -37,7 +37,7 @@ export const UserOrders = () => {
                                     <td>{x._id}</td>
                                     <td>{x.office_address}</td>
                                     <td>{x.isDispatched ? 'Dispatched' : 'Pending'}</td>
-                                    <td>{x.total_price}</td>
+                                    <td>{x.total_price.toFixed(2)}</td>
                                 </tr>
                             )}
                         </tbody>

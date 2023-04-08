@@ -11,16 +11,15 @@ export const getUserCart = async (userId, token) => {
     return cart;
 }
 
-export const addItemToCart = async (userId, itemId, token) => {
+export const addItemToCart = async (item, userId, itemId, token) => {
 
     const cart = await getUserCart(userId, token)
 
-    const newItem = await getOne('tools', itemId);
+    const newItem = await getOne(item, itemId);
 
     if (cart?.items.some(x => x._id === itemId)) {
         return { status: 'existing' }
     }
-
 
     const items = [...cart.items, newItem];
 
@@ -44,7 +43,7 @@ export const addToCart = async (cartId, newItems, token) => {
     return result;
 }
 const getCart = async (ownerId) => {
-    const request = await fetch(`${baseUrl}/likes?where=_ownerId%3D%22${ownerId}%22`);
+    const request = await fetch(`${baseUrl}?where=_ownerId%3D%22${ownerId}%22`);
     const result = await request.json();
     return result[0];
 }

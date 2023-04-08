@@ -28,7 +28,8 @@ export const AllProducts = () => {
                     {
                         category === "all" ?
 
-                            products.map(x => <Product key={x._id} {...x} role={role==="owner"}/>) :
+                            products.map(x => <Product key={x._id} {...x} role={role==="owner"}/>) 
+                            :
                             products.filter(x => x['category'] === category).map(x => <Product key={x._id} {...x} role={role==="owner"}/>)
                     }
 

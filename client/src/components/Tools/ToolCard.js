@@ -13,7 +13,6 @@ export const ToolCard = ({
     imageUrl,
     category,
     type,
-    summary,
     isOwner,
     userId,
     price,
@@ -42,7 +41,7 @@ export const ToolCard = ({
     }
 
     const addItemHandler = async () => {
-        const result = await addItemToCart(userId, _id, token);
+        const result = await addItemToCart('tools', userId, _id, token);
         if (result.status === 'existing') {
             displayToast({ title: "This tool is already in your cart!", show: true, bg: 'warning' })
         } else {

@@ -131,7 +131,7 @@ export const UserCartTable = () => {
                                     <td></td>
                                     <td></td>
                                     <td>Total:</td>
-                                    <td>{total}</td>
+                                    <td>{total.toFixed(2)}</td>
                                     <td></td>
                                 </tr>
                                 <tr>
