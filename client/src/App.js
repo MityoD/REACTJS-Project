@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
-import { Navigation } from './components/Navigation';
+import { Navigation } from './components/Navigation/Navigation';
 import { CarouselSlide } from './components/Carousel/CarouselSlide';
 import { Login } from './components/Login/Login';
 import { Register } from './components/Register/Register';
@@ -11,7 +11,7 @@ import { AddTool } from './components/Tools/AddTool'
 import { AllTools } from './components/Tools/AllTools';
 import { ToolDetails } from './components/Tools/ToolDetails';
 import { EditTool } from './components/Tools/EditTool';
-import { Tabs } from './components/Products/Tabs';
+import { Tabs } from './components/Navigation/Tabs';
 import { AllProducts } from './components/Products/AllProducts';
 import { AddProduct } from './components/Products/AddProduct';
 import { ProductDetails } from './components/Products/ProductDetails';
