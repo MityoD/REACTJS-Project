@@ -36,7 +36,7 @@ export const CommentProject = ({
                     minute: "numeric"
                 })}`,
                 userEmail,
-                _replays: []
+                _replies: []
             }
 
             const result = await addComment('/comments', comment, token);

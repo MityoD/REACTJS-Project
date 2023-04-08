@@ -6,7 +6,7 @@ export const getProjectComments = async (projectId) => {
     return comments;
 }
 
-export const addReplay = async (commentId, _replays, token) => {
+export const addReply = async (commentId, _replays, token) => {
     const response = await fetch(`${baseUrl}/${commentId}`, {
         method: 'PATCH',
         headers: {

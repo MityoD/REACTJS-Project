@@ -32,7 +32,7 @@
     border-radius: 6px;
 }
 
-.formReplay{
+.formReply{
     width: 52vw;
     height: 80px;
     padding: 10px;
@@ -49,13 +49,13 @@
     width: 40vw;
 }
 
-.replayGroupItem{
+.replyGroupItem{
     border: 1px solid lightgray;
     border-radius: 6px;
     margin-top: 10px;
 }
 
-.formGroupReplay{
+.formGroupReply{
     width: 90%;
 }
 

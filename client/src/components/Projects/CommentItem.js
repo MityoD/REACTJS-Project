@@ -4,8 +4,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import styles from '../Projects/Comments.module.css'
 import { useAuthContext } from "../../contexts/AuthContext";
-import { getOne as getCommentReplays } from '../../services/toolService';
-import { addReplay } from '../../services/commentService';
+import { getOne as getCommentReplies } from '../../services/toolService';
+import { addReply } from '../../services/commentService';
 import { useForm } from "../../hooks/useForm";
 import { useEffect, useState } from 'react';
 
@@ -17,17 +17,17 @@ export const CommentItem = (
         _id,
     }
 ) => {
-    const [replays, setReplays] = useState([])
+    const [replies, setReplies] = useState([])
     useEffect(() => {
-        getCommentReplays('comments', _id).then(x => setReplays(x._replays))
+        getCommentReplies('comments', _id).then(x => setReplies(x._replies))
     }, [])
 
     const { token, displayToast, isAuthenticated, userEmail } = useAuthContext();;
 
-    const onAddReplaySubmit = async (data) => {
+    const onAddReplySubmit = async (data) => {
         try {
-            const _replay = {
-                comment: values.commentReplay,
+            const _reply = {
+                comment: values.commentReply,
                 date: `${new Date().toLocaleString('en-GB', {
                     day: "numeric",
                     month: "numeric",
@@ -38,10 +38,10 @@ export const CommentItem = (
                 })}`,
                 userEmail
             }
-            await addReplay(_id, { "_replays": [...replays, _replay] }, token);
-            setReplays(x => [...x, _replay])
-            values.commentReplay = '';
-            displayToast({ title: "Your replay is sent", show: true, bg: 'secondary' });
+            await addReply(_id, { "_replies": [...replies, _reply] }, token);
+            setReplies(x => [...x, _reply])
+            values.commentReply = '';
+            displayToast({ title: "Your reply is sent", show: true, bg: 'secondary' });
 
         } catch (error) {
             console.log(error)
@@ -49,8 +49,8 @@ export const CommentItem = (
         }
     };
     const { values, changeHandler, onSubmit } = useForm({
-        commentReplay: '',
-    }, onAddReplaySubmit);
+        commentReply: '',
+    }, onAddReplySubmit);
 
 
     return (
@@ -59,7 +59,7 @@ export const CommentItem = (
             <ListGroup.Item as="li">
                 <div className={styles.commentItem}>
                     <div className="ms-2 me-auto">
-                        <div className="fw-bold">{ownerEmail}</div>
+                        <div className="fw-bold">{ownerEmail.split('@')[0]}</div>
                         {comment}
                     </div>
                     <Badge bg="secondary" pill>
@@ -68,12 +68,12 @@ export const CommentItem = (
                 </div>
 
                 <ListGroup as="ol">
-                    {replays &&
-                        replays.map(x =>
-                            <ListGroup.Item as="li" className={styles.replayGroupItem} key={`${Date.now()} ${Math.random()}`}>
+                    {replies &&
+                        replies.map(x =>
+                            <ListGroup.Item as="li" className={styles.replyGroupItem} key={`${Date.now()} ${Math.random()}`}>
                                 <div className={styles.commentItem}>
                                     <div className="ms-2 me-auto">
-                                        <div className="fw-bold">{x.userEmail}</div>
+                                        <div className="fw-bold">{x.userEmail.split('@')[0]}</div>
                                         {x.comment}
                                     </div>
                                     <Badge bg="secondary" pill>
@@ -86,19 +86,19 @@ export const CommentItem = (
                 </ListGroup>
 
                 {isAuthenticated &&
-                    <Form method="patch" onSubmit={onSubmit} className={styles.formReplay} >
-                        <Form.Group controlId="title" className={styles.formGroupReplay}>
-                            <Form.Label>Write your replay</Form.Label>
+                    <Form method="patch" onSubmit={onSubmit} className={styles.formReply} >
+                        <Form.Group controlId="title" className={styles.formGroupReply}>
+                            <Form.Label>Write your reply</Form.Label>
                             <Form.Control
                                 required
                                 type="text"
-                                name="commentReplay"
-                                value={values.commentReplay}
+                                name="commentReply"
+                                value={values.commentReply}
                                 onChange={changeHandler}
-                                placeholder="Write your replay here" />
+                                placeholder="Write your reply here" />
                         </Form.Group>
                         <Button variant="dark" type="submit">
-                            Replay
+                            Reply
                         </Button>
                     </Form>
                 }
