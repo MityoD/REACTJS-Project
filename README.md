@@ -55,7 +55,7 @@ Carousel with the last three added tools and link for the details.
 
 Unauthenticated users can see the projects and their details and comments.
 
-A place where authenticated users can share their solar projects with the comunity. 
+A place where authenticated users can share their solar projects with the community. 
 
 In the project details menu authenticated users can add comments and reply to existing ones.
 
