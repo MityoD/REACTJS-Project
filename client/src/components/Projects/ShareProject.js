@@ -8,7 +8,12 @@ export const ShareProject = () => {
 
     const { token, displayToast, isAuthenticated } = useAuthContext();;
     const navigate = useNavigate();
+
     const onAddProjectSubmit = async (data) => {
+        if (Object.values(data).some(x => x.toString().trim() === '')) {
+            displayToast({ title: "Enter valid data", show: true, bg: 'warning' })
+            return;
+        }
         try {
             await addTool('/projects', data, token);
             displayToast({ title: "Project added successfully!", show: true, bg: 'success' });

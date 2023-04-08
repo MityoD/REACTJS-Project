@@ -9,6 +9,10 @@ export const AddProduct = () => {
     const { token, displayToast } = useAuthContext();;
     const navigate = useNavigate();
     const onAddProductSubmit = async (data) => {
+        if(Object.values(data).some(x => x.toString().trim() === '')){
+            displayToast({title:"Enter valid data", show:true, bg:'warning'})
+            return;
+        }
         try {
             await addTool('/products', data, token);
             displayToast({ title: "Product added successfully!", show: true, bg: 'success' });
@@ -24,7 +28,8 @@ export const AddProduct = () => {
         category: '',
         price: '',
         imageUrl: '',
-        summary: ''
+        summary: '',
+        type:''
     }, onAddProductSubmit);
 
     return (
@@ -40,15 +45,24 @@ export const AddProduct = () => {
                         onChange={changeHandler}
                         placeholder="Enter title" />
                 </Form.Group>
-
-                <Form.Group className="mb-3" controlId="brand">
+                <Form.Group className="mb-3" controlId="category">
                     <Form.Label>Category</Form.Label>
                     <Form.Control
                         required
                         type="text"
-                        placeholder="category"
+                        placeholder="Category"
                         name="category"
                         value={values.category}
+                        onChange={changeHandler} />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="type">
+                    <Form.Label>Type</Form.Label>
+                    <Form.Control
+                        required
+                        type="text"
+                        placeholder="Type"
+                        name="type"
+                        value={values.type}
                         onChange={changeHandler} />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="price">
@@ -57,7 +71,7 @@ export const AddProduct = () => {
                         required
                         type="number"
                         name="price"
-                        placeholder="price"
+                        placeholder="Price"
                         min="0.01" 
                         step="0.01"
                         value={values.price}
@@ -69,7 +83,7 @@ export const AddProduct = () => {
                         type="Url"
                         name="imageUrl"
                         required
-                        placeholder="price"
+                        placeholder="Image URL"
                         value={values.imageUrl}
                         onChange={changeHandler} />
                 </Form.Group>
@@ -79,7 +93,7 @@ export const AddProduct = () => {
                         type="text"
                         name="summary"
                         required
-                        placeholder="summary"
+                        placeholder="Summary"
                         value={values.summary}
                         onChange={changeHandler} />
                 </Form.Group>

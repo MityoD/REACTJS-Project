@@ -12,6 +12,10 @@ export const AddTool = () => {
     const navigate = useNavigate();
 
     const onAddToolSubmit = async (data) => {
+        if(Object.values(data).some(x => x.trim() === '')){
+            displayToast({title:"Enter valid data", show:true, bg:'warning'})
+            return;
+        }
         try {
             await addTool('/tools', data, token);
             displayToast({title:"Tool added successfully!", show:true, bg:'success'})

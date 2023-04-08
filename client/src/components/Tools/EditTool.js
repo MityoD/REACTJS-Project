@@ -15,6 +15,10 @@ export const EditTool = () => {
 
 
     const onEditToolSubmit = async () => {
+        if (Object.values(values).some(x => x.toString().trim() === '')) {
+            displayToast({ title: "Enter valid data", show: true, bg: 'warning' })
+            return;
+        }
         try {
             await edit('tools', toolId, values, token);
             displayToast({ title: "Tool edited successfully!", show: true, bg: 'success' });
@@ -59,7 +63,7 @@ export const EditTool = () => {
                             <Form.Control
                                 type="text"
                                 placeholder="Category"
-                                name="Category"
+                                name="category"
                                 value={values.category}
                                 onChange={changeHandler} />
                         </Form.Group>

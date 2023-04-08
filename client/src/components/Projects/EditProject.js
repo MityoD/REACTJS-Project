@@ -14,6 +14,10 @@ export const EditProject = () => {
     const { projectId } = useParams();
 
     const onEditProductSubmit = async () => {
+        if(Object.values(values).some(x => x.toString().trim() === '')){
+            displayToast({title:"Enter valid data", show:true, bg:'warning'})
+            return;
+        }
         try {
             await edit('projects', projectId, values, token);
             displayToast({ title: "Project edited successfully!", show: true, bg: 'success' });
