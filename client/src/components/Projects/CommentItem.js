@@ -25,6 +25,10 @@ export const CommentItem = (
     const { token, displayToast, isAuthenticated, userEmail } = useAuthContext();;
 
     const onAddReplySubmit = async (data) => {
+        if(Object.values(data).some(x => x.trim() === '')){
+            displayToast({title:"Enter valid data", show:true, bg:'warning'})
+            return;
+        }
         try {
             const _reply = {
                 comment: values.commentReply,

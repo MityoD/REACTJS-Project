@@ -23,6 +23,10 @@ export const CommentProject = ({
     const { token, displayToast, userEmail, isAuthenticated } = useAuthContext();;
 
     const onAddCommentSubmit = async (data) => {
+        if(Object.values(data).some(x => x.trim() === '')){
+            displayToast({title:"Enter valid data", show:true, bg:'warning'})
+            return;
+        }
         try {
             const comment = {
                 ...data,

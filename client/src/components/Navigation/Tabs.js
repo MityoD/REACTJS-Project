@@ -2,7 +2,6 @@ import Nav from 'react-bootstrap/Nav';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/AuthContext';
 
-
 export const Tabs = () => {
     const location = useLocation().pathname;
 
@@ -73,7 +72,7 @@ export const Tabs = () => {
             </Nav>
                 <img style={{ overflow: 'hidden', width: '100%', height: '120px', objectFit: 'cover', marginTop:'-1px', marginBottom:'20px' }}
                     alt="171x1z0"
-                    src="https://www.weuppower.com/storage/uploads/images/202301/18/1674017161_iW4BNQ3eqh.jpg"
+                    src="/images/tabsImage.jpg"
                 />
         </>
     );
