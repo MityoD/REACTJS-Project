@@ -1461,7 +1461,7 @@
                 "_createdOn": 1680882124982,
             },
         },
-        questions: {
+        comments: {
         }
     };
     var rules$1 = {

@@ -1,0 +1,71 @@
+.comments{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.comments h3 {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.link{
+    color:lightgray
+}
+
+.link:hover{
+    color:#212529;
+}
+
+.form{
+    width: 55vw;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    gap: 40px;
+    margin-bottom: 20px;
+    border: 1px solid lightgray;
+    border-radius: 6px;
+}
+
+.formReplay{
+    width: 52vw;
+    height: 80px;
+    padding: 10px;
+    margin:20px 10px auto auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+    gap: 20px;
+    border: 1px solid lightgray;
+    border-radius: 6px;
+}
+
+.formGroup{
+    width: 40vw;
+}
+
+.replayGroupItem{
+    border: 1px solid lightgray;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+.formGroupReplay{
+    width: 90%;
+}
+
+.listGroup{
+    width: 55vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.commentItem{
+    display: flex;
+    align-items: center;
+}
