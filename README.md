@@ -1,6 +1,10 @@
 # REACTJS-Project
 SoftUni ReactJS Project - Solar Solutions
 
+You can test the deployed project at https://md-solar-solutions.web.app/
+
+But you need to run the server from the folder locally.
+
 ## Available Users
 
 ### `Owner`
