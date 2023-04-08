@@ -28,7 +28,7 @@ export const Projects = () => {
                     projects.filter(x => x._ownerId === userId).length !== 0
                         ?
                         projects.filter(x => x._ownerId === userId).map(x => <ProjectCart key={x._id} {...x} isOwner={x._ownerId === userId} userId={userId} token={token} />)
-                        : <h5>No Projects Yet! <Link to={'/projects-share'}>Share your project now!</Link></h5>
+                        : <h5>No Projects Yet! <Link to={'/projects/share'}>Share your project now!</Link></h5>
                     : projects.map(x => <ProjectCart key={x._id} {...x} isOwner={x._ownerId === userId} userId={userId} token={token} />)
                 }
             </Row>

@@ -33,7 +33,7 @@ export const ShareProject = () => {
         )
     }
     return (
-        <div div style={{ width: '40%', margin: '50px auto' }}>
+        <div style={{ width: '40%', margin: '50px auto' }}>
             <Form method="post" onSubmit={onSubmit}>
                 <Form.Group className="mb-3" controlId="title">
                     <Form.Label>Title</Form.Label>
