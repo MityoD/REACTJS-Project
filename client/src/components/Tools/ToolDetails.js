@@ -16,7 +16,7 @@ export const ToolDetails = () => {
     }, [toolId]);
 
     const addItemHandler = async () => {
-        const result = await addItemToCart(userId, toolId, token);
+        const result = await addItemToCart('tools', userId, toolId, token);
         if (result.status === 'existing') {
             displayToast({ title: "This tool is already in your cart!", show: true, bg: 'warning' })
         } else {
