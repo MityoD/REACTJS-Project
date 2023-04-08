@@ -39,6 +39,8 @@ Carousel with the last three added tools and link for the details.
 
 **Guest** & **Unauthenticated** can see products catalog and product details
 
+**Authorized** users can add products to their cart
+
 #### Tabs to:
 
 * All Products  
@@ -51,7 +53,19 @@ Carousel with the last three added tools and link for the details.
 
 ### `Projects`
 
-Not implemented yet.
+Unauthenticated users can see the projects and their details and comments.
+
+A place where authenticated users can share their solar projects with the comunity. 
+
+In the project details menu authenticated users can add comments and reply to existing ones.
+
+#### Tabs to:
+
+* All Projects  
+
+* Share your project  
+
+* My Projects  
 
 ### `Tools`
 
