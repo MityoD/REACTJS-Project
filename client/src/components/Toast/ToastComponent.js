@@ -12,8 +12,6 @@ export const ToastComponent = () => {
     setShow(toastList.show ? true : false)
   }, [toastList]);
 
-
-
   return (
 
     <ToastContainer position="top-end">

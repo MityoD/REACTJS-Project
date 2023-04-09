@@ -27,9 +27,6 @@ export const addItemToCart = async (item, userId, itemId, token) => {
     return { status: 'added' }
 }
 
-
-
-
 export const addToCart = async (cartId, newItems, token) => {
     const request = await fetch(`${baseUrl}/${cartId}`, {
         method: 'PUT',
@@ -42,6 +39,7 @@ export const addToCart = async (cartId, newItems, token) => {
     const result = await request.json();
     return result;
 }
+
 const getCart = async (ownerId) => {
     const request = await fetch(`${baseUrl}?where=_ownerId%3D%22${ownerId}%22`);
     const result = await request.json();
@@ -60,7 +58,6 @@ const createCart = async (data, token) => {
     const result = await response.json();
     return result;
 };
-//     const request = await fetch(`${baseUrl}/likes?where=toolId%3D%22${toolId}%22%20and%20_ownerId%3D%22${userId}%22&count`);
 
 export const sendOrder = async (data, token) => {
     const response = await fetch('http://localhost:3030/data/orders', {
